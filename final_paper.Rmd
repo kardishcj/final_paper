@@ -5,17 +5,20 @@ date: "December 8, 2016"
 output: pdf_document
 ---
 
-```{r}
-
 #setwd('C:/Users/Chris/Documents/GitHub/final_paper')
+#rm(list = ls())
 
-summary(cars)
-```
+I. Introduction/literature review (Marie)
 
-You can also embed plots, for example:
+II. Brief discussion of the data source (Marie)
 
-```{r, echo=FALSE}
-plot(cars)
-```
+III. methodology/model, variables included, and any cleaning that was performed (Chris) 
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+IV. Results (mainly, tables of coefficients, exponentiated coefficients, and discussion of
+those results) (Chris)
+
+V. Simulations using the model (Chris)
+
+VI. Goodness-of-fit/robustness (Chris)
+
+VII. Conclusion (both of us? Don't know)
