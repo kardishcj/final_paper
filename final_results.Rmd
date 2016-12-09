@@ -28,8 +28,8 @@ library(stargazer)
 stargazer(M_genY, M_genX, M_boomer, M_silent, type = 'text',
           dep.var.labels = "Probability of voting in 2012", 
           column.labels = c("Gen Y", "Gen X", "Boomers", "Silent"),
-          title = "Figure 1: Log Odds Across Four Generations")
-
+          title = "Figure 1: Log Odds Across Four Generations", 
+          ci = T)
 
 ```
 
@@ -54,14 +54,15 @@ kable(conf_intervals_kab, format = 'markdown', col.names = c("Gen Y",
 
 ```
 
-The results in figures 1 and 2 show a considerable degree of consistency across generations. The effect of an additional level of education or income has a similar positive, statistically significant, and substantively significant relationship with voter turnout across generations. The lone exception is education among Generation X, but as seen in Figure 2, the confidence interval does not quite include zero within its range. The effect of being a woman is also generally consistent across generations, though not statistically significant, while the effect of past voting behavior (vote_2008) is positive across all generations but varies in terms of the strength of the effect, as will be made clearer below when viewing the exponentiated coefficients. 
+The results in figures 1 and 2 show a considerable degree of consistency across generations. The effect of an additional level of education or income has a similar positive, statistically significant, and substantively significant relationship with voter turnout across generations. The lone exception is education among Generation X, but as seen in Figure 2, the confidence interval does not quite include zero within its range. Still, it is considered statistically insignificant for Generation X. The effect of being a woman is also generally consistent across generations, though not statistically significant, while the effect of past voting behavior (vote_2008) is positive across all generations but varies in terms of the strength of the effect, as will be made clearer below when viewing the exponentiated coefficients. 
 
-The greatest variation between generations can be found in the effects of race, though those effects are not uniformly statistically significant across generations. The effect of being black or hispanic is positive and significant for Millennial, while the effect of being hispanic is not statistically significant or positive for all other generations. The effect of being black is also statistically significant for Baby Boomers and the Silent Generation, but the substantive significance is markedly different. The effect is negative for Baby Boomers but strongly positive among the Silent Generation. 
+The greatest variation between generations can be found in the effects of race, and those effects are not uniformly statistically significant across generations. The effect of being black or hispanic is positive and significant for Millennials, while the effect of being hispanic is not statistically significant or positive for any other generation. The effect of being black is also statistically significant for Baby Boomers and the Silent Generation, but the substantive significance is markedly different: the effect is negative for Baby Boomers but strongly positive among the Silent Generation, even more substantively significant than for Millennials. 
 
 ```{r, echo=FALSE, message=FALSE, results='asis'}
 
 stargazer(M_genY, M_genX, M_boomer, M_silent, type = 'text', apply.coef = exp,
-          dep.var.labels = "Probability of voting in 2012", 
+         t.auto=F, p.auto=F, report = "vct*", 
+         dep.var.labels = "Probability of voting in 2012", 
           column.labels = c("Gen Y", "Gen X", "Boomers", "Silent"),
           title = "Figure 3: Odds Ratios Across Four Generations")
 
@@ -81,10 +82,15 @@ conf_intervals_exp$silent <- paste(conf_intervals_exp$`7`, conf_intervals_exp$`8
 conf_intervals_exp_kab <- cbind(conf_intervals_exp$gen_Y, conf_intervals_exp$gen_X,
                         conf_intervals_exp$boomer, conf_intervals_exp$silent)
 
-
 kable(conf_intervals_exp_kab, format = 'markdown', col.names = c("Gen Y", "Gen X", 
                 "Boomers", "Silent"),
                 caption = "Figure 4: Confidence Intervals of Odds Ratios")
 
 ```
 
+The above findings are simply reinforced when observing the exponentiated coefficients (Figure 3), but their substantive impact is easier to interpret.
+
+
+https://www.quora.com/How-does-one-interpret-an-odds-ratio 
+http://www.ats.ucla.edu/stat/stata/faq/oratio.htm
+odds are ____ times larger if blah blah
