@@ -1,0 +1,44 @@
+---
+title: "final_predictions"
+author: "Chris Kardish, Marie Agosta"
+date: "December 9, 2016"
+output: pdf_document
+---
+
+```{r, include=FALSE}
+#setwd('C:/Users/Chris/Documents/GitHub/final_paper')
+#setwd('C:/Users/Chris/Documents/R/col_soc_science')
+#rm(list = ls()) this command clears your environment
+source("cleaning_final.R")
+
+```
+
+
+
+```{r, echo=FALSE, message=FALSE, results='asis'}
+library(MASS)
+library(dplyr)
+library(Zelig)
+#Steps. 1) run model but using Zelig, which is able to use survey weights
+#2) use "setx" function to set the values for the simulation
+#3) run the simulation using the parameters you specified (sim)
+#4) plot using ci.plot
+
+Z_genY <- zelig(vote_2012 ~ education + female + vote_2008 + black + hispanic + income, model = "logit.survey", weights=~weights, strata=~strata, data = anes_genY)
+Z_boomer <- zelig(vote_2012 ~ education + female + vote_2008 + black + hispanic + income, model = "logit.survey", weights=~weights, strata=~strata, 
+                  data = anes_boomer)
+setZ_genY_black <- setx(Z_genY, education = 1:5, black = 1, hispanic = 0, 
+                        income = 3, female = 1, vote_2008 = 0)
+simZ_genY_black <- sim(Z_genY, x = setZ_genY_black)
+ci.plot(simZ_genY_black, ylim = 0:1, ylab = "Probability of voting", 
+        main = "Black Millennial Woman")
+setZ_boomer_black <- setx(Z_genY, education = 1:5, black = 1, hispanic = 0, 
+                          income = 3, female = 1, vote_2008 = 0)
+simZ_boomer_black <- sim(Z_boomer, x = setZ_boomer_black)
+ci.plot(simZ_boomer_black, ylim = 0:1, ylab = "Probability of voting", 
+        main = "Black Baby Boomer Woman")
+
+
+
+
+```
