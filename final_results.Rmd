@@ -1,0 +1,90 @@
+---
+title: "final_results"
+author: "Chris Kardish, Marie Agosta"
+date: "December 8, 2016"
+output: pdf_document
+---
+###Results
+
+The results are presented both as they appear in logistic regression ouput (Figure 1) for basic interpretation of the coefficients, but owing to the challenge of interpreting substantive significance from log odds, a table of the same coefficients in exponential form is provided (Figure 3) to show the same results as odds ratios. Confidence intervals are supplied for both the log-odd coefficients (Figure 2) and for odds ratios (Figure 4).  
+
+```{r, include=FALSE}
+#setwd('C:/Users/Chris/Documents/GitHub/final_paper')
+#setwd('C:/Users/Chris/Documents/R/col_soc_science')
+#rm(list = ls()) this command clears your environment
+source("cleaning_final.R")
+
+```
+
+```{r, echo=FALSE, message=FALSE, results='asis'}
+
+
+library(stargazer)
+
+
+#to look at the stargazer, try the one below, which uses "text." The one below only appears
+#when you knit to PDF.
+
+stargazer(M_genY, M_genX, M_boomer, M_silent, type = 'text',
+          dep.var.labels = "Probability of voting in 2012", 
+          column.labels = c("Gen Y", "Gen X", "Boomers", "Silent"),
+          title = "Figure 1: Log Odds Across Four Generations")
+
+
+```
+
+```{r, echo=FALSE, message=FALSE, results='asis'}
+
+library(knitr)
+conf_intervals <- cbind(confint(M_genY), confint(M_genX), confint(M_boomer), 
+                        confint(M_silent))
+conf_intervals <- round(conf_intervals, digits = 3)
+conf_intervals <- as.data.frame(conf_intervals)
+colnames(conf_intervals) <- c(1, 2, 3, 4, 5, 6, 7, 8)
+conf_intervals$gen_Y <- paste(conf_intervals$`1`, conf_intervals$`2`, sep=",")
+conf_intervals$gen_X <- paste(conf_intervals$`3`, conf_intervals$`4`, sep=",")
+conf_intervals$boomer <- paste(conf_intervals$`5`, conf_intervals$`6`, sep=",")
+conf_intervals$silent <- paste(conf_intervals$`7`, conf_intervals$`8`, sep=",")
+conf_intervals_kab <- cbind(conf_intervals$gen_Y, conf_intervals$gen_X,
+                        conf_intervals$boomer, conf_intervals$silent)
+
+kable(conf_intervals_kab, format = 'markdown', col.names = c("Gen Y", 
+                "Gen X", "Boomer", "Silent"), 
+                caption = "Figure 2: Confidence Intervals of Log Odds")
+
+```
+
+The results in figures 1 and 2 show a considerable degree of consistency across generations. The effect of an additional level of education or income has a similar positive, statistically significant, and substantively significant relationship with voter turnout across generations. The lone exception is education among Generation X, but as seen in Figure 2, the confidence interval does not quite include zero within its range. The effect of being a woman is also generally consistent across generations, though not statistically significant, while the effect of past voting behavior (vote_2008) is positive across all generations but varies in terms of the strength of the effect, as will be made clearer below when viewing the exponentiated coefficients. 
+
+The greatest variation between generations can be found in the effects of race, though those effects are not uniformly statistically significant across generations. The effect of being black or hispanic is positive and significant for Millennial, while the effect of being hispanic is not statistically significant or positive for all other generations. The effect of being black is also statistically significant for Baby Boomers and the Silent Generation, but the substantive significance is markedly different. The effect is negative for Baby Boomers but strongly positive among the Silent Generation. 
+
+```{r, echo=FALSE, message=FALSE, results='asis'}
+
+stargazer(M_genY, M_genX, M_boomer, M_silent, type = 'text', apply.coef = exp,
+          dep.var.labels = "Probability of voting in 2012", 
+          column.labels = c("Gen Y", "Gen X", "Boomers", "Silent"),
+          title = "Figure 3: Odds Ratios Across Four Generations")
+
+```
+
+```{r, echo=FALSE, message=FALSE, results='asis'}
+
+conf_intervals_exp <- cbind(exp(confint(M_genY)), exp(confint(M_genX)), 
+                            exp(confint(M_boomer)), exp(confint(M_silent)))
+conf_intervals_exp <- round(conf_intervals_exp, digits = 3)
+conf_intervals_exp <- as.data.frame(conf_intervals_exp)
+colnames(conf_intervals_exp) <- c(1, 2, 3, 4, 5, 6, 7, 8)
+conf_intervals_exp$gen_Y <- paste(conf_intervals_exp$`1`, conf_intervals_exp$`2`, sep=",")
+conf_intervals_exp$gen_X <- paste(conf_intervals_exp$`3`, conf_intervals_exp$`4`, sep=",")
+conf_intervals_exp$boomer <- paste(conf_intervals_exp$`5`, conf_intervals_exp$`6`, sep=",")
+conf_intervals_exp$silent <- paste(conf_intervals_exp$`7`, conf_intervals_exp$`8`, sep=",")
+conf_intervals_exp_kab <- cbind(conf_intervals_exp$gen_Y, conf_intervals_exp$gen_X,
+                        conf_intervals_exp$boomer, conf_intervals_exp$silent)
+
+
+kable(conf_intervals_exp_kab, format = 'markdown', col.names = c("Gen Y", "Gen X", 
+                "Boomers", "Silent"),
+                caption = "Figure 4: Confidence Intervals of Odds Ratios")
+
+```
+
