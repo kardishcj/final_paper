@@ -12,13 +12,13 @@ output: pdf_document
 
 ## Research Question and introduction 
 
-Do tradiitonal indicators of voter turnout hold the same predictive power from one generation to the next? Do other potential indicators, such as race or gender, have more predictive power for the Millennial generation? 
+Do tradiitonal indicators of voter turnout hold the same predictive power from one generation to the next? Do other potential indicators, such as race or gender, hold more predictive power for the Millennial generation? 
  
 Traditionally, an individual's age is one of the most common predictors of differences in attitudes and behaviors, particularly when it comes to voting. Age denotes what cohort a particular person belongs to and what point of the life cycle a particular person is in: childhood, young adult, middle aged, or retiree. Generations typically refer to people born over a 15-20-year span. According to the Pew Research Center, Millennials are the generation born from 1980-1994, making them approximately 22-36 years old as of 2016.
  
 In the United States, for the past 25 years, the Baby Boomer generation (1946-1964) was the defining vote in presidential and down-ballot elections. However, at 75.4 million people, Millennials now outnumber the Baby Boomers '[@fry2015year]'.
  
-Millennials will play an increasingly significant role in U.S. elections as they represent an ever-greater share of eligible voters, but there are substantial differences in disposition and demographics between them and previous generations, which could well mean differences in factors that bring them to the polls. Bringing millennials to the polls has been quite a challenge, they have lower turnout rates than previous generations did at that age. 
+Millennials will play an increasingly significant role in U.S. elections as they represent an ever-greater share of eligible voters, but there are substantial differences in disposition and demographics between them and previous generations, which could well mean differences in factors that bring them to the polls. Bringing millennials to the polls has been quite a challenge, they have lower turnout rates than previous generations did at that age. Given how demographically and culturally different they are, it is important to understand what actually makes them vote. 
  
 Generational shifts in attitude have been well documented '[@kohut2011generation]'. Millennials are in no rush to get married, are more supportive of larger governments, are more likely to have debt, are more accepting of gay-marriage, and are more aware of gender discrimination. Additionally, most millennials came of age during a recession '[@o2015millennials]' and identify with and engage with technology in a way that was inconceivable to past generations. These societal shifts and cultural norms will affect how they view and partake in politics. Millennials are the only generation where just as many people describe their views as liberal as they do conservative. They also have the highest number of people reported as being open to a third-party candidate and are relatively unattached to organized politics and religion '[@fry2015year]'. 
 
@@ -48,7 +48,7 @@ Virtually any demographic variable that appears in voter turnout literature is i
 
 Additionally, a 2013 follow-up using the same participants includes a host of additional variables covering attitudes and opinions on major political issues. But this data set would have to be merged with the 2012 original using unique participant identification numbers and because of the response rate, we would be reducing our sample size if we were to incorperate the follow-up. 
 
-##III. methodology/model, variables included, and any cleaning that was performed (Chris) 
+##III. Methodology and model, variables included, and any cleaning that was performed (Chris) 
 
 The traditional indicators of voter turnout: education, income, age, and marital status, were indicative of generations that were characterized by minimal minority voice, fairly traditional gender roles, minimal economic-sectoral shifts, and a lack of reliance on technology. We postulate that the Millennials, given their diversity and the time in which they came of age, may not vote according to past predictors.
 
@@ -75,13 +75,13 @@ Additionally, the role women play in social, political, and economic life has ch
 
 ##VI. Limitations, including Goodness-of-fit/robustness (Marie &Chris)
 
-There are a number of limitations with our analysis and the dataset that was used. Foremost, only using 2012 to gain insight into voting indicators diminshes any external validity. Ideally, panel data would be used to gain more externally valid insights into predictors. Additionally, past voting behavior in this survey, refered to the participants voting behavior in the year of 2008. The 2008 presidential election had record turnout, specifically among millennials and specifically among African-Americans. Using 2008 as a proxy for past voting behavior needs to be looked at critically as it is probably overestimates past voting behavior. 
+There are a number of limitations with our analysis and the dataset that was used. Foremost, only using 2012 to gain insight into voting indicators diminshes external validity. Ideally, panel data would be used to gain more externally valid insights into predictors. Additionally, past voting behavior in this survey, refered to the participants voting behavior in the year of 2008. The 2008 presidential election had record turnout, specifically among millennials and specifically among African-Americans. Using 2008 as a proxy for past voting behavior needs to be looked at critically as it probably overestimates past voting behavior. 
 
 Another limitation is the response rate which was approximately 49%, the lowest the ANES study has ever recorded. Due to this, there is an increased likelihood that non-response bias affected the estimates. There was also a fair amount of item non-response, meaning selected respondents participated but only provided partial answers to some basic questions - e.g. responding to questions about employment with "I don't know" or "refused to answer."
 
 With any household survey, there are important issues that can affect estimates, including non-response and item non-response (mentioned above) and the potential for measurment error. Measurement error refers to error among those reporting. Self survey (internet) and self report (face-to-face interview) are always vulnerable to this. Respondents can under-report, by misunderstanding a complicated question or thinking information may be passed on to tax authorities, or over-report due to human error or social desirability. Additionally, all estimates from sample surveys are subject to sampling variability. This has implications for inference about distributional comparisons, such as trends and differences. 
 
-Goodness of fit should also be considered, ......
+Goodness of fit should also be considered...
 
 ##VII. Conclusion (Marie)
 
@@ -91,7 +91,9 @@ We discovered that...
 
 This... 
 
-The remaining variance in the model potentially speaks to other, more contextual and systemic variables that are often not looked at in conjuction with individual level indicators. The closeness of the election, contextual socio-economic conditions, and registration laws have an impact on who goes to the polls. Registration laws could be of partiuclar importance as portions of the voting rights act were recently repealled and newly encforced restrictions for registering and voting disporoportionatly hurt minorities. Also, Millennials move more than past generations, Baby Boomers in particular, and in the U.S. context this entails numerous obstacles, such as registering to vote again in the new place of residence '[@benetsky2015young]'.
+The remaining variance in the model potentially speaks to contextual and systemic variables that are often not looked at in conjuction with individual level indicators. The closeness of the election, contextual socio-economic conditions, and registration laws have an impact on who goes to the polls. Registration laws could be of partiuclar importance as portions of the Voting Rights Act were recently struck down and newly (re)enforced restrictions for registering and voting disporoportionatly hurt minorities. Also, Millennials move more than past generations, and in the U.S. context this entails numerous obstacles, such as registering to vote again in the new place of residence '[@benetsky2015young]'.
+
+
 
 
 BELOW ARE NOTES FROM ABOVE THAT I PLAN TO INCLUDE, JUST WANT TO WAIT UNTIL IT'S ALL TOGETHER TO DO IT. 
