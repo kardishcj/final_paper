@@ -71,6 +71,8 @@ Additionally, the role women play in social, political, and economic life has ch
 ##IV. Results (mainly, tables of coefficients, exponentiated coefficients, and discussion of
 ##those results) (Chris)
 
+Using '[@Manual]', 
+
 ##V. Simulations using the model (Chris)
 
 ##VI. Limitations, including Goodness-of-fit/robustness (Marie &Chris)
