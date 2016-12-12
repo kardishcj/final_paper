@@ -4,18 +4,16 @@ author: "Chris Kardish, Marie Agosta"
 date: "December 9, 2016"
 output: pdf_document
 ---
-
+###Predictions using the model
+Because of challenges using base R to run and store predictions, this section utilizes the Zelig package and its survey-weighted logit option. It will provide a number of plots showing the predicted probability of a given demographic makeup voting in the 2012 election, based on the model, across a number of different generations but using Millennials as a reference point. The first (below), compares the probability of voting in the 2012 election for a black woman of moderate income ($45,000-$65,000 a year) who did not vote in 2008 at various levels of education. 
 ```{r, include=FALSE}
 #setwd('C:/Users/Chris/Documents/GitHub/final_paper')
 #setwd('C:/Users/Chris/Documents/R/col_soc_science')
 #rm(list = ls()) this command clears your environment
 source("cleaning_final.R")
-
 ```
 
-
-
-```{r, echo=FALSE, message=FALSE, results='asis'}
+```{r, echo=FALSE, message=FALSE, results='asis', out.width='.49\\linewidth', fig.width=3.5, fig.height=3.5, fig.align='center', fig.show='hold', warning=FALSE}
 library(MASS)
 library(dplyr)
 library(Zelig)
@@ -32,7 +30,61 @@ setZ_genY_black <- setx(Z_genY, education = 1:5, black = 1, hispanic = 0,
 simZ_genY_black <- sim(Z_genY, x = setZ_genY_black)
 ci.plot(simZ_genY_black, ylim = 0:1, ylab = "Probability of voting", 
         main = "Black Millennial Woman")
-setZ_boomer_black <- setx(Z_genY, education = 1:5, black = 1, hispanic = 0, 
+setZ_boomer_black <- setx(Z_boomer, education = 1:5, black = 1, hispanic = 0, 
+                          income = 3, female = 1, vote_2008 = 0)
+simZ_boomer_black <- sim(Z_boomer, x = setZ_boomer_black)
+ci.plot(simZ_boomer_black, ylim = 0:1, ylab = "Probability of voting", 
+        main = "Black Baby Boomer Woman")
+```
+The simulation gives a visual sense of the impact of the statistically and substantively significant effect of race for Millennials. A black Millennial woman of moderate income was much more likely to vote in 2012 than a Baby Boomer of similar characteristics across all levels of education. The model cannot explain the reason, however, which would require further research. Given the even stronger statistical and substantive significance of being black for the Silent Generation, it is likely that the predicted probabilities of voting as a black female of moderate education is even higher for this generation. The plot below clearly bears this out.  
+```{r, echo=FALSE, message=FALSE, results='asis', out.width='.49\\linewidth', fig.width=3.5, fig.height=3.5, fig.align='center', fig.show='hold', warning=FALSE}
+ci.plot(simZ_genY_black, ylim = 0:1, ylab = "Probability of voting", 
+        main = "Black Millennial Woman")
+Z_silent <- zelig(vote_2012 ~ education + female + vote_2008 + black + hispanic + income, model = "logit.survey", weights=~weights, strata=~strata, 
+                  data = anes_silent)
+setZ_silent_black <- setx(Z_silent, education = 1:5, black = 1, hispanic = 0, 
+                        income = 3, female = 1, vote_2008 = 0)
+
+simZ_silent_black <- sim(Z_silent, x = setZ_silent_black)
+ci.plot(simZ_silent_black, ylim = 0:1, ylab = "Probability of voting", 
+        main = "Black Silent Generation Woman")
+```
+We now turn to another demographic. Below are the predicted probabilities of voting in 2012 for a white male with a high school education who did not vote in 2008 across various all levels of income included in the data set.
+```{r, echo=FALSE, message=FALSE, results='asis', out.width='.49\\linewidth', fig.width=3.5, fig.height=3.5, fig.align='center', fig.show='hold', warning=FALSE}
+
+setZ_genY_white <- setx(Z_genY, income = 1:7, education = 2, black = 0, 
+                        hispanic = 0, female =0, vote_2008 = 0)
+simZ_genY_white <- sim(Z_genY, x = setZ_genY_white)
+ci.plot(simZ_genY_white, ylim = 0:1, ylab = "Probability of voting", 
+        main = "White Millennial Man")
+#Now, Baby Boomer
+setZ_boomer_white <- setx(Z_boomer, income = 1:7, education = 2, black = 0, 
+                          hispanic = 0, female =0, vote_2008 = 0)
+simZ_boomer_white <- sim(Z_boomer, x = setZ_boomer_white)
+ci.plot(simZ_boomer_white, ylim = 0:1, ylab = "Probability of voting", 
+        main = "White Baby Boomer Man")
+```
+In the case of white men with only a high-school education the model predicts essentially the same starting point of around 37 percent for Millennials and Baby Boomers at the lowest income range of 0-$25,000. But the Millennial in this case quickly surpasses the Baby Boomer in probability of voting in 2012, even if not by a substantial percentage, ultimately topping out at about 60 percent at the highest level of income. This likely reflects the heightened importance of income for the Millennials in terms of predicting 2012 voter turnout.
+
+Then try out other stuff generations on the white guy question before lastly moving to the voting thing.
+
+Then go into the assumption of whether someone voted or not, and run it at every generation. Then close things out. Continue comparison Baby Boomer and Millennial first, then show the other two generations.  
+
+```{r, echo=FALSE, message=FALSE, results='asis', out.width='.49\\linewidth', fig.width=3.5, fig.height=3.5, fig.align='center', fig.show='hold', warning=FALSE}
+
+Z_silent <- zelig(vote_2012 ~ education + female + vote_2008 + black + hispanic + income, model = "logit.survey", weights=~weights, strata=~strata, 
+                  data = anes_silent)
+setZ_silent_white <- setx(Z_silent, income = 1:7, education = 2, black = 0, 
+                        hispanic = 0, female =0, vote_2008 = 0)
+simZ_silent_white <- sim(Z_silent, x = setZ_silent_white)
+ci.plot(simZ_genY_white, ylim = 0:1, ylab = "Probability of voting", 
+        main = "White Silent Gen Man")
+
+
+
+
+
+setZ_boomer_black <- setx(Z_boomer, education = 1:5, black = 1, hispanic = 0, 
                           income = 3, female = 1, vote_2008 = 0)
 simZ_boomer_black <- sim(Z_boomer, x = setZ_boomer_black)
 ci.plot(simZ_boomer_black, ylim = 0:1, ylab = "Probability of voting", 
@@ -41,4 +93,36 @@ ci.plot(simZ_boomer_black, ylim = 0:1, ylab = "Probability of voting",
 
 
 
+
+Z_genX <- zelig(vote_2012 ~ education + female + vote_2008 + black + hispanic + income, model = "logit.survey", weights=~weights, strata=~strata, 
+                  data = anes_genX)
+
+setZ_genX_white <- setx(Z_genX, income = 1:7, education = 2, black = 0, 
+                        hispanic = 0, female =0, vote_2008 = 0)
+simZ_genX_white <- sim(Z_genX, x = setZ_genX_white)
+ci.plot(simZ_genY_white, ylim = 0:1, ylab = "Probability of voting", 
+        main = "White Gen X Man")
+
+
+
+
+setZ_genY_voted <- setx(Z_genY, income = 1:7, education = 2, black = 0, 
+                        hispanic = 0, female =0, vote_2008 = 1)
+simZ_genY_voted <- sim(Z_genY, x = setZ_genY_voted)
+ci.plot(simZ_genY_voted, ylim = 0:1, ylab = "Probability of voting", 
+        main = "White Millennial Man w/ Past Voting")
+
+
+setZ_genX_voted <- setx(Z_genX, income = 1:7, education = 2, black = 0, 
+                        hispanic = 0, female =0, vote_2008 = 1)
+simZ_genX_voted <- sim(Z_genX, x = setZ_genY_voted)
+ci.plot(simZ_genX_voted, ylim = 0:1, ylab = "Probability of voting", 
+        main = "White Gen X Man w/ Past Voting")
+
+
+setZ_boomer_voted <- setx(Z_boomer, income = 1:7, education = 2, black = 0, 
+                          hispanic = 0, female =0, vote_2008 = 1)
+simZ_boomer_voted <- sim(Z_boomer, x = setZ_boomer_voted)
+ci.plot(simZ_boomer_voted, ylim = 0:1, ylab = "Probability of voting", 
+        main = "White Baby Boomer Man w/ Past Voting")
 ```
