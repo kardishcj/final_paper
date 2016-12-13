@@ -1,0 +1,33 @@
+---
+title: "final_gof"
+author: "Chris Kardish, Marie Agosta"
+date: "December 13, 2016"
+output: pdf_document
+---
+###Goodness of Fit
+Receiver Operating Characteristic, or ROC Plots, help summarize how well a model for dichotomous outcome fits the actual (data http://r.iq.harvard.edu/docs/zelig.pdf). The closer the ROC curve is to the upper right corner of the plot, the better the fit of the model specification (King and Zeng, 2002b). From this standpoint, the model fits all four generations far better than the diagonal line in each plot, which is how a model with little predictive power would appear. But there is still clearly significant difference between the predictive power of these models and an excellent model, which would extend closer to the upper right-hand corner. 
+```{r, include=FALSE}
+#setwd('C:/Users/Chris/Documents/GitHub/final_paper')
+#setwd('C:/Users/Chris/Documents/R/col_soc_science')
+#rm(list = ls()) this command clears your environment
+source("cleaning_final.R")
+```
+
+```{r, echo=FALSE, message=FALSE, results='asis', out.width='.49\\linewidth', fig.width=3.5, fig.height=3.5, fig.align='center', fig.show='hold', warning=FALSE}
+library(Zelig)
+rocplot(Z_genY, Z_boomer, col1 = 'blue', col2 = 'red', lty1="solid", lty2="solid",
+        xlab = "Proportion of voted correctly predicted", 
+        ylab = "Proportion of didn't vote correctly predicted")
+legend("bottomleft", c("Millennial","Baby Boomer"), 
+       lty=c(1,1), lwd=c(2.5,2.5), col=c('blue','red'))
+rocplot(Z_genX, Z_silent, col1 = 'grey', col2 = 'brown', lty1="solid", lty2="solid",
+        xlab = "Proportion of voted correctly predicted", 
+        ylab = "Proportion of didn't vote correctly predicted")
+legend("bottomleft", c("Gen X","Silent Gen"), 
+       lty=c(1,1), lwd=c(2.5,2.5), col=c('grey','brown'))
+rocplot(Z_boomer, Z_silent, col1 = 'blue', col2 = 'red', lty1="solid", lty2="solid",
+        xlab = "Proportion of voted correctly predicted", 
+        ylab = "Proportion of didn't vote correctly predicted")
+legend("bottomleft", c("Baby Boomer", "Silent Gen"), 
+       lty=c(1,1), lwd=c(2.5,2.5), col=c('blue','red'))
+```
