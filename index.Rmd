@@ -1,11 +1,14 @@
 ---
-title: "final_paper"
-author: "Chris Kardish, Marie Agosta"
-date: "December 8, 2016"
-output: pdf_document
-bibliography: final_paper.bib
-fig_caption: yes
+title: "index"
+author: "me"
+date: "12/12/2016"
+output: html_document
+theme: journal
+    highlight: tango
+toc: true
+    toc_depth: 2
 ---
+
 ##I. Introduction 
 
 Do traditional indicators of voter turnout hold the same predictive power from one generation to the next? Do other potential indicators, such as race or gender, hold more predictive power for the Millennial generation? 
@@ -81,7 +84,7 @@ The results are presented both as they appear in logistic regression ouput (Figu
 source("cleaning_final.R")
 ```
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+```{r, echo=FALSE, message=FALSE, results='asis'}
 library(stargazer)
 
 stargazer(M_genY, M_genX, M_boomer, M_silent, 
@@ -116,7 +119,7 @@ The results in Tables 1 and 2 show a considerable degree of consistency across g
 
 The greatest variation between generations can be found in the effects of race, and those effects are not uniformly statistically significant across generations. The effect of being black or hispanic is positive and significant for Millennials, while the effect of being hispanic is not statistically significant or positive for any other generation. The effect of being black is also statistically significant for Baby Boomers and the Silent Generation, but the substantive significance is markedly different: the effect is negative for Baby Boomers but strongly positive among the Silent Generation, even more substantively significant than for Millennials. 
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+```{r, echo=FALSE, message=FALSE, results='asis'}
 
 stargazer(M_genY, M_genX, M_boomer, M_silent, apply.coef = exp,
          t.auto=F, p.auto=F, report = "vct*", 
@@ -312,7 +315,8 @@ Additionally, population size and electoral closeness, and population stability 
 
 Other variables of interest include civic duty, which we believe will not have as strong of an impact owing to a greater sense of social dislocation among Millennials, which will also contribute to diminished impact of membership in traditional institutions (church, unions, etc.). Because of these factors, Millennials will have to feel an especially strong attachment to a candidate in a given election in order to vote, which is measurable using ANES, and contact from a political party will have an especially high impact [@kitchel2015they].
 
-test 
+
 
 
 # Bibliography
+
