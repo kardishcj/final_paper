@@ -23,6 +23,8 @@ library("flexdashboard")
 
 **Do traditional indicators of voter turnout hold the same predictive power from one generation to the next? Do other potential indicators, such as race or gender, hold more predictive power for the Millennial generation?** 
 
+Millennials will play an increasingly significant role in U.S. elections as they represent the greatest share of eligible voters, but there are substantial differences in disposition and demographics between them and previous generations, which could well mean differences in factors that bring them to the polls. Although, **69.2 million Millenials** are eligible to vote, historically, approximately 50-55% do not turn out to vote for presidential elections. 
+
 Traditional indicators of voter turnout: 
 
 * income 
@@ -30,14 +32,6 @@ Traditional indicators of voter turnout:
 * occupation
 * education 
 * Past voting decisions
-
-**Why it matters**
-
-Millennials will play an increasingly significant role in U.S. elections as they represent an ever-greater share of eligible voters, but there are substantial differences in disposition and demographics between them and previous generations, which could well mean differences in factors that bring them to the polls.
-
-* Approximately **69.2 million Millenials** are of voting age and are eligible to vote 
-    + Largest share of eligible voters yet 
-    + Only 45-50% of them typically vote
     
 **Key Findings**
     
