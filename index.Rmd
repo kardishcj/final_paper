@@ -21,44 +21,72 @@ library("flexdashboard")
 
 # Executive Summary 
 
-**In the US, do traditional indicators of individual voter turnout hold the same predictive power across generations? Are there insightful differences when it comes to the Millennial generation?** 
+**Do traditional indicators of voter turnout hold the same predictive power from one generation to the next? Do other potential indicators, such as race or gender, hold more predictive power for the Millennial generation?** 
 
 Traditional indicators of voter turnout: 
 
-- income 
-- age
-- occupation
-- education 
-- Past voting decisions
+* income 
+* age
+* occupation
+* education 
+* Past voting decisions
 
 **Why it matters**
 
-Approximately **69.2 million Millenials** are of voting age and are eligible to vote, making them the largest share of eligible voters yet only 45-50% of them typically vote. Millenials are demographically much more diverse than previous generations and came of age in a very secular and technology driven world 
+Millennials will play an increasingly significant role in U.S. elections as they represent an ever-greater share of eligible voters, but there are substantial differences in disposition and demographics between them and previous generations, which could well mean differences in factors that bring them to the polls.
+
+* Approximately **69.2 million Millenials** are of voting age and are eligible to vote 
+    + Largest share of eligible voters yet 
+    + Only 45-50% of them typically vote
+    
+**Key Findings**
+    
+**1.) Key predictors still show a large degree of consistency across generations.**
+
+**2.) The impact of education is indeed lower for Millennials than any other generation.** 
+
+**3.) Past voting decisions play a far bigger role with age.** 
+
+**4.) Being one of the two major racial minorities in the U.S. was a more substantively and statistically significant predictor for**   
+    **Millennials than any other generation.** 
+
+**5.) Income proved to be just as valid, if not slightly more so, for Millennials relative to other generations.** 
+
+**6.) Gender was not a statisically significant factor for any generation, let alone Millennials. Still, income and education showed**   
+    **strong consistency across generations, while race and past voting decisions proved the most decisive factors.**
 
 # Methodology & Choice of Data 
 
-We opted for a logit model because we want to assess if traditional indicators hold the same predictive power across generations. Our dependent variable is binary: 0 - did not vote in 2012, 1 - voted in 2012. 
+We use a logistic regression to assess the strength of various predictors on the likelihood that a given respondent voted in 2012. Thus, we use a binary dependent variable, also known as a dummy variable, coded "1" if the respondent did vote in 2012 and 0 if not. We run the same model but for different age bands. This allows us to discern differences in predictive power across age groups. 
 
-Independent variables (same model across 4 generations) are: 
-- education
-- gender (female dummy)
-- income
-- race (black and hispanic dummies)
-- whether respondent voted in 2008 
+The variables included in the model are:
+
+*Education* - a numeric variable consisting of the following levels of attainment: 1) below high school 2) high school 3) some post-high-school education 4) a bachelor's degree 5) a graduate degree. 
+
+*Income* - a numeric variable whose categories are: 1) under $20,000 per year 2) $20,000 to $45,000 per year 3) $45,000 to $65,000 per year 4) $65,000 to $90,000 per year 5) $90,000 to $125,000 per year 6) $125,000 to $250,000 per year 7) $250,000 or more per year.  
+
+*Vote_2008* - a dummy variable indicating whether the respondent voted in 2008 or not. 
+
+*Black* - a dummy variable indicating whether the respondent is black or not. 
+
+*Hispanic* - a dummy variable indicating whether the respondent is hispanic or not. 
+
+*Female* - a dummy variable indicating whether someone is a woman or not. 
+
 
 **Choice of Data**
 
-- American National Election Studies 
-- Face to face and internet survey, N = 4,505
-- Response Rates: 
-    + Face-to-face: 38 percent
-    + Online: 2 percent
-- Over 1,900 variables
-- Conducted in English and Spanish 
-- Weighted survey 
+The source we used was the 2012 Time Series Study from American National Election Studies (ANES), 
+* A joint Stanford University and University of Michigan collaboration  This study has been 
+* Conducted annually since 1948 
+* Produced a sizable (62MB) panel survey of approximately 6,000 respondents who answered two sets of questions on two separate occasions,   
+  both before the 2012 presidential election and afterward. 
+* Conducted via face-to-face interviews, and through internet interviews.  
+* Includes 1,908 variables and was conducted in English and Spanish. 
+* Clustering and post-stratification weights were used. 
 
 
-# Plots and Results 
+# Plots & Results 
 
 Row
 -------------------------------------
@@ -122,4 +150,9 @@ ci.plot(simZ_silent_black, ylim = 0:1, ylab = "Probability of voting",
 
 # Limitations 
 
+There are a number of limitations with our analysis and the dataset that was used. Foremost, only using 2012 to gain insight into voting indicators diminshes external validity. Ideally, panel data would be used to gain more externally valid insights into predictors. Additionally, past voting behavior in this survey, refered to the participants voting behavior in the year of 2008. The 2008 presidential election had record turnout, specifically among millennials and specifically among African-Americans. Using 2008 as a proxy for past voting behavior needs to be looked at critically as it probably overestimates past voting behavior. 
+
+Another limitation is the response rate which was approximately 49%, the lowest the ANES study has ever recorded. Due to this, there is an increased likelihood that non-response bias affected the estimates. There was also a fair amount of item non-response, meaning selected respondents participated but only provided partial answers to some basic questions - e.g. responding to questions about employment with "I don't know" or "refused to answer."
+
+With any household survey, there are important issues that can affect estimates, including non-response and item non-response (mentioned above) and the potential for measurment error. Measurement error refers to error among those reporting. Self survey (internet) and self report (face-to-face interview) are always vulnerable to this. Respondents can under-report, by misunderstanding a complicated question or thinking information may be passed on to tax authorities, or over-report due to human error or social desirability. Additionally, all estimates from sample surveys are subject to sampling variability. This has implications for inference about distributional comparisons, such as trends and differences. 
 
