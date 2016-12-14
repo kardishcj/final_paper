@@ -3,6 +3,8 @@ title: "index"
 author: "me"
 date: "12/12/2016"
 output: html_document
+theme: journal
+toc: true
 
 ---
 
@@ -14,6 +16,8 @@ source("cleaning_final.R")
 ```
 
 ## Research Question 
+
+
 
  **In the US, do traditional indicators of individual voter turnout hold the same predictive power across generations?** 
 
