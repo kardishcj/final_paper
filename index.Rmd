@@ -80,20 +80,30 @@ ci.plot(simZ_boomer_black, ylim = 0:1, ylab = "Probability of voting",
 
 The variables included in the model are:
 
-  *Education* - a numeric variable consisting of the following levels of attainment: 1) below high school 2) high school 3) some     
-                post-high-school education 4) a bachelor's degree 5) a graduate degree. 
+     Education - a numeric variable consisting of the following levels of attainment: 
+  
+                          1) below high school 
+                          2) high school 
+                          3) some post-high-school education 
+                          4) a bachelor's degree 5) a graduate degree. 
 
-  *Income* - a numeric variable whose categories are: 1) under $20,000 per year 2) $20,000 to $45,000 per year 3) $45,000 to $65,000 per   
-             year 4) $65,000 to $90,000 per year 5) $90,000 to $125,000 per year 6) $125,000 to $250,000 per year 7) $250,000 or more per 
-             year.  
+     Income - a numeric variable whose categories are: 
+  
+                          1) under $20,000 per year 
+                          2) $20,000 to $45,000 per year 
+                          3) $45,000 to $65,000 per year 
+                          4) $65,000 to $90,000 per year 
+                          5) $90,000 to $125,000 per year 
+                          6) $125,000 to $250,000 per year 
+                          7) $250,000 or more per year
 
-  *Vote_2008* - a dummy variable indicating whether the respondent voted in 2008 or not. 
+     Vote_2008 - a dummy variable indicating whether the respondent voted in 2008 or not. 
+   
+     Black - a dummy variable indicating whether the respondent is black or not. 
 
-  *Black* - a dummy variable indicating whether the respondent is black or not. 
+     Hispanic - a dummy variable indicating whether the respondent is hispanic or not. 
 
-  *Hispanic* - a dummy variable indicating whether the respondent is hispanic or not. 
-
-  *Female* - a dummy variable indicating whether someone is a woman or not. 
+     Female - a dummy variable indicating whether someone is a woman or not. 
 
 
 **Choice of Data**
@@ -109,12 +119,12 @@ The source we used was the 2012 Time Series Study from American National Electio
 * Clustering and post-stratification weights were used. 
 
 
-# Plots & Results 
+# Additional Plots & Results 
 
 Row
 -------------------------------------
 
-### Coefficients
+### Odds Ratios Across Four Generations 
 
 ```{r echo = FALSE, results='asis', message=FALSE,}
 #setwd('C:/Users/Chris/Documents/GitHub/Final_Presentation')
@@ -130,7 +140,7 @@ stargazer(M_genY, M_genX, M_boomer, M_silent, apply.coef = exp,
 Row
 -------------------------------------
 
-### Black Babyboomer and Black Millennial 
+### Black Babyboomer Women and Black Millennial Women  
 
 ```{r, echo=FALSE, include=FALSE, message=FALSE}
 library(Zelig)
@@ -159,7 +169,7 @@ ci.plot(simZ_boomer_black, ylim = 0:1, ylab = "Probability of voting",
 Row 
 -------------------------------------
 
-### Chart 3
+### Black Millennial Women & Black Silent Generation Women 
 
 ```{r, message=FALSE, echo = FALSE, fig.align='center', fig.show='hold', fig.width=3.5, fig.height=5}
 ci.plot(simZ_genY_black, ylim = 0:1, ylab = "Probability of voting", 
