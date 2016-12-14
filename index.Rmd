@@ -3,172 +3,95 @@ title: "index"
 author: "me"
 date: "12/12/2016"
 output: html_document
-theme: journal
-    highlight: tango
-toc: true
-    toc_depth: 2
+
 ---
 
-##I. Introduction 
-
-Do traditional indicators of voter turnout hold the same predictive power from one generation to the next? Do other potential indicators, such as race or gender, hold more predictive power for the Millennial generation? 
- 
-Traditionally, an individual's age is one of the most common predictors of differences in attitudes and behaviors, particularly when it comes to voting. In the United States, for the past 25 years, the Baby Boomer generation (1946-1964) was the defining vote in presidential and down-ballot elections. However, at 75.4 million people, Millennials now outnumber the Baby Boomers [@fry2015year]. 
- 
-Millennials will play an increasingly significant role in U.S. elections as they represent an ever-greater share of eligible voters, but there are substantial differences in disposition and demographics between them and previous generations, which could well mean differences in factors that bring them to the polls. Bringing millennials to the polls has been quite a challenge, they have lower turnout rates than previous generations did at that age. Given how demographically and culturally different they are, it is important to understand what actually makes them vote. Thus, we are most interested in differences in voter turnout among this generation. We believe that differences between Millennials and older generations will translate into different substantively significant relationships between various explanatory variables and the likelihood of someone voting.
- 
-Generational shifts in attitude have been well documented [@kohut2011generation]. Millennials are in no rush to get married, are more supportive of larger governments, are more likely to have debt, are more accepting of gay-marriage, and are more aware of gender discrimination. Additionally, most millennials came of age during a recession [@o2015millennials] and identify with and engage with technology in a way that was inconceivable to past generations. These societal shifts and cultural norms will affect how they view and partake in politics. Millennials are the only generation where just as many people describe their views as liberal as they do conservative. They also have the highest number of people reported as being open to a third-party candidate and are relatively unattached to organized politics and religion [@fry2015year]. 
-
-Lastly, Millennials are diverse. First, the age range in and of itself implies a diversity of experience, but more importantly, according to the U.S. Census Bureau, for every 100 millennials, 44 are a part of a minority race or ethnic group.  To put it another way, in 2000 only 8 states and Washington DC had a share of minority voters that was 30% or higher. In 2012, the number of states was 17 (plus Washington DC) [@CensusBureau.2016].
-
-##II. Literature review
-
-The Downsian Model of Electoral competition broadly states that if policy space is unidimensional, and voters have single-peaked preferences over the policy dimension, then the median voter becomes pivotal in majority decision making. Downs (1957) used this result to analyze electoral competition, and demonstrated that two competing parties will converge to the policy of the preferred median voter. There are quite restrictive assumptions with this model, including that politicians are able to pre-commit to their proposed platforms. That being said, the model delivers a clear prediction about the impact of electoral competition on public policy and has become a mainstay in the field. 
-
-The original Downsian Model did not pay much attention to who the "median voter" was, so subsequent studies built on his model by showing that the median voter and median citizen are usually not one in the same. An abundant number of theoretical models have emerged, trying to explain voter turnout, yet there is limited academic consensus on a core model. Different models have found empirical support in different contexts, suggesting that perhaps voter turnout has different causal mechanisms depending upon the country, voters, and time period [@smets2013embarrassment].
-
-When it comes to the United States, non-voters have not been randomly distributed across the country. Empirical research shows that voters and nonvoters systematically differ in their socio-economic status and demographic backgrounds. These differences allude to potential differences in needs and policy preferences [@verba1993citizen] [@wolfinger1980votes].
-
-A highly regarded study by Raymond Wolfinger and Steven Rosenstone (1980) [@wolfinger1980votes] demonstrated that in the US, turnout is fairly predictable based on a number of individual demographic variables. The variables are education, income, age, marital status, and occupation. Independent of the specific election or country examined, these results have been confirmed repeatedly by subsequent studies [@smets2013embarrassment]. Smets and Van Ham (2012) conducted a thorough meta-analysis on individual level turnout and also found that education, age, income, and marital status were consistently statistically significant in regards to voter turnout. It should, however, be noted that there are substantial limits in the predictive and explanatory power of even well-specified statistical models. As Matsusaka (1999) has shown, voter turnout models generally suffer from a low r-squared, meaning they explain only a limited percentage of the factors behind the phenomenon [@matsusaka1999voter]. In the same study, Matsusaka found that past voting decisions were the strongest predictor of future voting decisions.    
-
-It is important to note that other empirical works [@cox1989closeness] [@leighley1992socioeconomic] have elaborated on these findings by focusing on systemic characteristics and have found that the closeness of the election, contextual socio-economic conditions, and registration laws have an impact on who goes to the polls. In a comprehensive meta-analysis on aggregate-level studies, many of which concentrated on the US (pgs. 654-657), Geys (2006) found that population size and electoral closeness, population stability, and past turnout were consistently positively significant, whereas racial diversity was consistently negatively significant. The interplay between individual predictors and systemic predictors has yet to be fully explored.
-
-##III. Data Source 
-
-Because our model will test a variety of different independent variables, we focused on a finding reputable and publicly available survey that includes key demographics along with attitudes, dispositions, past voting history, and other factors. 
-
-The source we settled on was the 2012 Time Series Study from American National Election Studies (ANES), a joint Stanford University and University of Michigan collaboration that is widely cited in academic literature. This study has been conducted annually since 1948. The study produced a sizable (62MB) panel survey of approximately 6,000 respondents who answered two sets of questions on two separate occasions, both before the 2012 presidential election and afterward. Most responses are conducted via face-to-face interviews, however this was the first year face-to-face interviews were supplemented by internet interviews. The set includes 1,908 variables and was conducted in English and Spanish. Because this is a nationally representative sample survey, clustering and post-stratification weights were used. 
-
-Particpants were interviewed by professionals trained with a touch sensitive tablet computer. Most of the interview was done in a computer aided personal interview format (CAPI) meaning the computer displays the question, the interviewer reads it aloud, the respondent answers verbally and the interviewer clicks the appropriate box. Interviwers were instructed to probe if people were hesitant to answer. Some questions were asked in a computer-aided self-interview format (CASI), meaning the respodent took the computer and answered questions privately. These questions were marked as such. 
-
-Virtually any demographic variable that appears in voter turnout literature is included, such as level of education, employment status, income, race, gender, and age. It also includes more than 60 additional sections assessing a wide range of topics, from political knowledge to social trust and opinions on salient political issues.  Lastly, it includes self-reported turnout (which was later confirmed) and choice for both the 2012 and 2008 elections, allowing us to control for past voting history as well, which has been shown to be a strong predictor of future turnout and a good control for a host of time-invariant factors [@matsusaka1999voter].
-
-Additionally, a 2013 follow-up using the same participants includes a host of additional variables covering attitudes and opinions on major political issues. But this data set would have to be merged with the 2012 original using unique participant identification numbers and because of the response rate, we would be reducing our sample size if we were to incorperate the follow-up. 
-
-##IV. Methodology and Model 
-
-We use a logistic regression to assess the strength of various predictors on the likelihood that a given respondent voted in 2012. Thus, we use a binary dependent variable coded "1" if the respondent did vote in 2012. But because our focus is to test whether traditional factors found in voter turnout literature have less predictive power for Millennials, we run the same model but for different age bands. This allows us to discern differences in predictive power across age groups. We use odds ratios from exponentiated coefficients to determine the overall impact of a given predictor, and will then run prediction simulations to give a clearer understanding of how the model plays out in reality. 
-
-The variables included in the model are:
-
-Education - a categorical variable that has been converted to numeric, consisting of the following levels of attainment: 1) below high school 2) high school 3) some post-high-school education 4) a bachelor's degree 5) a graduate degree. 
-
-We predict education will have less have less substantive significance as a predictor of voter turnout because American Millennials are actually far more educated than their parents, essentially diluting the importance of a four-year degree as a key benchmark for civic participation and income attainment [@patten2015millennials]. 
-
-Income - a categorical variable originally consisting of over 28 categories that have been collapsed into seven categories then coded as numeric. Those categories are: 1) under $20,000 per year 2) $20,000 to $45,000 per year 3) $45,000 to $65,000 per year 4) $65,000 to $90,000 per year 5) $90,000 to $125,000 per year 6) $125,000 to $250,000 per year 7) $250,000 or more per year.  
-
-we predict that income will have a less substantively significant impact on voter turnout for Millennials because it is less a part of Millennial identity and explains less about individuals in this age group (@taylor2010millennials).  
-
-Vote_2008 - a dummy variable indicating whether the respondent voted in 2008 or not. As stated in the literature review, this is considered a highyl reliable predictor of future voting behavior, so it is included here as a strong control variable. 
-
-We predict past voting decisions will not be as strong of a predictor because the habits of Millennials are not as ingrained. 
-
-Black - a dummy variable indicating whether the respondent is black or not. This will help isolate differences in race across generations.
-
-Hispanic - a dummy variable indicating whether the respondent is hispanic or not. This will help isolate differences in race across generations.
-
-Female - a dummy variable indicating whether someone is a woman or not. This will help isolate differences in gender across generations.
-
-We predict that gender and race will be stronger indicators than in previous generations, particularly the interactions between them. Minority Millennials compose a large portion of the whole generation, and they have been casting votes at a high enough rate to strongly influence election turnout [@Ramsey.2016].
- 
-Additionally, the role women play in social, political, and economic life has changed dramatically through the generations. There are more women in college, more women with degrees, and more women as the sole, or primary breadwinner of the family [@wang2013breadwinner]. These shifts, especially the economic ones, have affected how women vote [@iversen2006political]. As traditional perceptions and roles have changed, social issues have also come to the forefront.
-
-##IV. Results 
-
-The results are presented both as they appear in logistic regression ouput (Figure 1) for basic interpretation of the coefficients, but owing to the challenge of interpreting substantive significance from log odds, a table of the same coefficients in exponential form is provided (Figure 3) to show the same results as odds ratios. Confidence intervals are supplied for both the log-odd coefficients (Figure 2) and for odds ratios (Figure 4).  
-
-```{r, include=FALSE}
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
 #setwd('C:/Users/Chris/Documents/GitHub/final_paper')
-#setwd('C:/Users/Chris/Documents/R/col_soc_science')
-#rm(list = ls()) this command clears your environment
 source("cleaning_final.R")
+#rm(list = ls()) 
 ```
 
-```{r, echo=FALSE, message=FALSE, results='asis'}
+## Research Question 
+
+ **In the US, do traditional indicators of individual voter turnout hold the same predictive power across generations?** 
+
+Traditional indicators of voter turnout: 
+
+- income 
+- age
+- occupation
+- education 
+- Past voting decisions
+
+For example, education is a traditional indicator used to assess the liklihood that you'll vote, but how strong is it for the Millenials compared to Baby Boomers? Are there other variables that would hold more predictive power for Millenials, such as race or gender? 
+
+## Why it matters
+
+Approximately **69.2 million Millenials** are of voting age and are eligible to vote, making them the largest share of eligible voters. Yet...
+
+- In the 2008 presidential election, 50% voted 
+- In the 2012 presidential election, 46% voted 
+- In the 2016 presidential election, had only millennials voted, Clinton would've won the election in a landslide - 473 electoral votes to Trump's 32.
+
+And... 
+
+- Millenials are demographically much more diverse than previous generations  
+- Millenials came of age in a very secular and technology driven world 
+
+## Methodology 
+
+We opted for a logit model because we want to assess if traditional indicators hold the same predictive power across generations.   
+
+Our dependent variable is binary: 0 - did not vote in 2012, 1 - voted in 2012. 
+
+Independent variables (same model across 4 generations) are: 
+
+- education
+- gender (female dummy)
+- income
+- race (black and hispanic dummies)
+- whether respondent voted in 2008 
+
+## Choice of Data 
+
+- American National Election Studies 
+- Face to face and internet survey, N = 4,505
+- Response Rates: 
+    + Face-to-face: 38 percent
+    + Online: 2 percent
+- Over 1,900 variables
+- Conducted in English and Spanish 
+- Weighted survey 
+
+## Model results {.flexbox .vcenter .smaller} 
+ 
+-Expressed as odds-ratios (exponentiated coefficients), so
+can be interpreted as factor change in odds of voting in 2012
+```{r echo = FALSE, results='asis', message=FALSE,}
+#setwd('C:/Users/Chris/Documents/GitHub/Final_Presentation')
 library(stargazer)
-
-stargazer(M_genY, M_genX, M_boomer, M_silent, 
-          dep.var.labels = "Probability of voting in 2012", 
-          column.labels = c("Gen Y", "Gen X", "Boomers", "Silent"),
-          title = "Log Odds Across Four Generations")
-
-```
-```{r, echo=FALSE, fig.cap='Figure 2: Confidence Intervals of Log Odds'}
-
-library(knitr)
-conf_intervals <- cbind(confint(M_genY), confint(M_genX), confint(M_boomer), 
-                        confint(M_silent))
-conf_intervals <- round(conf_intervals, digits = 3)
-conf_intervals <- as.data.frame(conf_intervals)
-colnames(conf_intervals) <- c(1, 2, 3, 4, 5, 6, 7, 8)
-conf_intervals$gen_Y <- paste(conf_intervals$`1`, conf_intervals$`2`, sep=",")
-conf_intervals$gen_X <- paste(conf_intervals$`3`, conf_intervals$`4`, sep=",")
-conf_intervals$boomer <- paste(conf_intervals$`5`, conf_intervals$`6`, sep=",")
-conf_intervals$silent <- paste(conf_intervals$`7`, conf_intervals$`8`, sep=",")
-varnames <- c("Intercept", "education", "female", "vote_2008", "black", "hispanic", "income")
-conf_intervals_kab <- cbind(varnames, conf_intervals$gen_Y, conf_intervals$gen_X,
-                        conf_intervals$boomer, conf_intervals$silent)
-
-kable(conf_intervals_kab, format = 'markdown', col.names = c("Coefficients", "Gen Y", 
-                "Gen X", "Boomer", "Silent"), 
-      caption = "Figure 2: Confidence Intervals of Log Odds")
-
-```
-
-The results in Tables 1 and 2 show a considerable degree of consistency across generations. The effect of an additional level of education or income has a similar positive, statistically significant, and substantively significant relationship with voter turnout across generations. The lone exception is education among Generation X, but as seen in Table 2, the confidence interval does not quite include zero within its range. Still, it is considered statistically insignificant for Generation X. The effect of being a woman is also generally consistent across generations, though not statistically significant, while the effect of past voting behavior (vote_2008) is positive across all generations but varies in terms of the strength of the effect, as will be made clearer below when viewing the exponentiated coefficients. 
-
-The greatest variation between generations can be found in the effects of race, and those effects are not uniformly statistically significant across generations. The effect of being black or hispanic is positive and significant for Millennials, while the effect of being hispanic is not statistically significant or positive for any other generation. The effect of being black is also statistically significant for Baby Boomers and the Silent Generation, but the substantive significance is markedly different: the effect is negative for Baby Boomers but strongly positive among the Silent Generation, even more substantively significant than for Millennials. 
-
-```{r, echo=FALSE, message=FALSE, results='asis'}
-
 stargazer(M_genY, M_genX, M_boomer, M_silent, apply.coef = exp,
-         t.auto=F, p.auto=F, report = "vct*", 
-         dep.var.labels = "Probability of voting in 2012", 
+         t.auto=F, p.auto=F, report = "vct*", font.size = 'tiny',
+          type = "html",  dep.var.labels = "Probability of voting in 2012", 
           column.labels = c("Gen Y", "Gen X", "Boomers", "Silent"),
           title = "Odds Ratios Across Four Generations")
-
-```
-```{r, echo=FALSE}
-
-conf_intervals_exp <- cbind(exp(confint(M_genY)), exp(confint(M_genX)), 
-                            exp(confint(M_boomer)), exp(confint(M_silent)))
-conf_intervals_exp <- round(conf_intervals_exp, digits = 3)
-conf_intervals_exp <- as.data.frame(conf_intervals_exp)
-colnames(conf_intervals_exp) <- c(1, 2, 3, 4, 5, 6, 7, 8)
-conf_intervals_exp$gen_Y <- paste(conf_intervals_exp$`1`, conf_intervals_exp$`2`, sep=",")
-conf_intervals_exp$gen_X <- paste(conf_intervals_exp$`3`, conf_intervals_exp$`4`, sep=",")
-conf_intervals_exp$boomer <- paste(conf_intervals_exp$`5`, conf_intervals_exp$`6`, sep=",")
-conf_intervals_exp$silent <- paste(conf_intervals_exp$`7`, conf_intervals_exp$`8`, sep=",")
-conf_intervals_exp_kab <- cbind(varnames, conf_intervals_exp$gen_Y, conf_intervals_exp$gen_X,
-                        conf_intervals_exp$boomer, conf_intervals_exp$silent)
-kable(conf_intervals_exp_kab, format = 'markdown', col.names = c("Coefficients", "Gen Y", "Gen X", "Boomers", "Silent"), caption = "Figure 4: Confidence Intervals of Odds Ratios")
-
 ```
 
-The above findings are simply reinforced when observing the exponentiated coefficients (Table 3), but their substantive impact is easier to interpret. An additional level of education increases the odds of voting 1.32 times for Millennials, and similarly across all generations. Recall that there are five levels of education, ranging from below high school to graduate-level. An additional level of income increases the odds of voting 1.22 times for Millennials and by a similar factor across all generations. Recall that there are 7 levels of income ranges, from $0-$20,000 per year to $250,000 or above. 
-
-However, it is also true that the odds-ratio of education for Millennials is slightly weaker than that of any other generation, which may reflect diminishing returns of the predictive power of a university education for this generation, which is the best educated of any in American history in terms of bachelor's degree attainment. The gains from a university education grow with the age of the generation, with the strongest odds for the Silent Generation. The effect of income, on the other hand, is stronger for Millennials than any generation other than the Silent Generation, with Generation X and Baby Boomers showing the smallest effects. 
-
-The starkest differences emerge when comparing race. Being black increases the odds of voting relative to the races in the base category (the intercept) -- which include white, Asian, and native American or Pacific islander -- by 2.6. The effect of being black for Baby Boomers decreases the odds of voting relative to other races, while being black and a member of the Silent Generation increases the odds of voting 6.28 times relative to the other races. The effect of being hispanic is statistically significant only for Millennials and is above one only for Millennials as well. With an increase in odds by 1.878 relative races in the base category, the effect for Millennial hispanics is not as strong for blacks. 
-
-Thus, being hispanic is a far stronger predictor of voter turnout for Millennials than for any other generation, and being black is also a stronger predictor for Millennials than for all generations aside from the Silent Generation. The effects of income and education, two well-established predictors of voter turnout, are actually largely consistent across generations. 
-
-##V. Predictions using the model results 
-
-Because of challenges using base R to run and store predictions, this section utilizes the Zelig package and its survey-weighted logit option. It will provide a number of plots showing the predicted probability of a given demographic makeup voting in the 2012 election, based on the model, across a number of different generations but using Millennials as a reference point. The first (below), compares the probability of voting in the 2012 election for a black woman of moderate income ($45,000-$65,000 a year) who did not vote in 2008 at various levels of education. 
-
-```{r, echo=FALSE, message=FALSE, results='asis', out.width='.49\\linewidth', fig.width=3.5, fig.height=3.5, fig.align='center', fig.show='hold', warning=FALSE}
-library(MASS)
-library(dplyr)
+## How the model plays out in simulation {.columns-2}
+Predicted probabilities of voting for a black woman of moderate income across various levels of education, assuming she didn't vote in 2008. 
+```{r, echo=FALSE, include=FALSE, message=FALSE}
 library(Zelig)
-#Steps. 1) run model but using Zelig, which is able to use survey weights
-#2) use "setx" function to set the values for the simulation
-#3) run the simulation using the parameters you specified (sim)
-#4) plot using ci.plot
-
 Z_genY <- zelig(vote_2012 ~ education + female + vote_2008 + black + hispanic + income, model = "logit.survey", weights=~weights, strata=~strata, data = anes_genY)
 Z_boomer <- zelig(vote_2012 ~ education + female + vote_2008 + black + hispanic + income, model = "logit.survey", weights=~weights, strata=~strata, 
                   data = anes_boomer)
+Z_silent <- zelig(vote_2012 ~ education + female + vote_2008 + black + hispanic + income, model = "logit.survey", weights=~weights, strata=~strata, 
+                  data = anes_silent)
+Z_genX <- zelig(vote_2012 ~ education + female + vote_2008 + black + hispanic + income, model = "logit.survey", weights=~weights, strata=~strata, 
+                  data = anes_genX)
+```
+```{r, message=FALSE, echo = FALSE, fig.align='center', fig.show='hold', fig.width=4, fig.height=5}
 setZ_genY_black <- setx(Z_genY, education = 1:5, black = 1, hispanic = 0, 
                         income = 3, female = 1, vote_2008 = 0)
 simZ_genY_black <- sim(Z_genY, x = setZ_genY_black)
@@ -180,37 +103,50 @@ simZ_boomer_black <- sim(Z_boomer, x = setZ_boomer_black)
 ci.plot(simZ_boomer_black, ylim = 0:1, ylab = "Probability of voting", 
         main = "Black Baby Boomer Woman")
 ```
-The simulation gives a visual sense of the impact of the statistically and substantively significant effect of race for Millennials. A black Millennial woman of moderate income was much more likely to vote in 2012 than a Baby Boomer of similar characteristics across all levels of education. The model cannot explain the reason, however, which would require further research. Given the even stronger statistical and substantive significance of being black for the Silent Generation, it is likely that the predicted probabilities of voting as a black female of moderate education is even higher for this generation. The plot below clearly bears this out.  
-```{r, echo=FALSE, message=FALSE, results='asis', out.width='.49\\linewidth', fig.width=3.5, fig.height=3.5, fig.align='center', fig.show='hold', warning=FALSE}
+## How the model plays out in simulation (part 2) {.columns-2}
+Using the same demographic, but this time showing the difference between Millennials and the Silent Generation. 
+```{r, message=FALSE, echo = FALSE, fig.align='center', fig.show='hold', fig.width=3.5, fig.height=5}
 ci.plot(simZ_genY_black, ylim = 0:1, ylab = "Probability of voting", 
         main = "Black Millennial Woman")
-Z_silent <- zelig(vote_2012 ~ education + female + vote_2008 + black + hispanic + income, model = "logit.survey", weights=~weights, strata=~strata, 
-                  data = anes_silent)
 setZ_silent_black <- setx(Z_silent, education = 1:5, black = 1, hispanic = 0, 
                         income = 3, female = 1, vote_2008 = 0)
 simZ_silent_black <- sim(Z_silent, x = setZ_silent_black)
 ci.plot(simZ_silent_black, ylim = 0:1, ylab = "Probability of voting", 
         main = "Black Silent Generation Woman")
 ```
-We now turn to another demographic. Below are the predicted probabilities of voting in 2012 for a white male with a high school education who did not vote in 2008 across various all levels of income included in the data set.
-```{r, echo=FALSE, message=FALSE, results='asis', out.width='.49\\linewidth', fig.width=3.5, fig.height=3.5, fig.align='center', fig.show='hold', warning=FALSE}
-
+## How the model plays out in simulation (part 3) {.columns-2}
+Predicted probabilities of voting for a white, high-school-educated man across levels of income, assuming he didn't vote in 2008. 
+```{r, message=FALSE, echo = FALSE, fig.align='center', fig.show='hold', fig.width=3.5, fig.height=5}
 setZ_genY_white <- setx(Z_genY, income = 1:7, education = 2, black = 0, 
-                        hispanic = 0, female =0, vote_2008 = 0)
+                        hispanic = 0, female =0, vote_2008 = 1)
 simZ_genY_white <- sim(Z_genY, x = setZ_genY_white)
 ci.plot(simZ_genY_white, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Millennial Man")
 #Now, Baby Boomer
 setZ_boomer_white <- setx(Z_boomer, income = 1:7, education = 2, black = 0, 
-                          hispanic = 0, female =0, vote_2008 = 0)
+                          hispanic = 0, female =0, vote_2008 = 1)
 simZ_boomer_white <- sim(Z_boomer, x = setZ_boomer_white)
 ci.plot(simZ_boomer_white, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Baby Boomer Man")
 ```
-
-In the case of white men with only a high-school education the model predicts essentially the same starting point of around 37 percent for Millennials and Baby Boomers at the lowest income range of 0-$25,000. But the Millennial in this case quickly surpasses the Baby Boomer in probability of voting in 2012, even if not by a substantial percentage, ultimately topping out at about 60 percent at the highest level of income. This likely reflects the heightened importance of income for the Millennials in terms of predicting 2012 voter turnout. Still, the difference is only slight, and the differences between Millennials and the other two generations for this demographic are similarly quite minor. They are shown below.
-
-```{r, echo=FALSE, message=FALSE, results='asis', out.width='.49\\linewidth', fig.width=3.5, fig.height=3.5, fig.align='center', fig.show='hold', warning=FALSE}
+## How the model plays out in simulation (part 3) {.columns-2}
+Predicted probabilities of voting for a white, high-school-educated man across levels of income, assuming he didn't vote in 2008. 
+```{r, message=FALSE, echo = FALSE, fig.align='center', fig.show='hold', fig.width=3.5, fig.height=5}
+setZ_genY_white <- setx(Z_genY, income = 1:7, education = 2, black = 0, 
+                        hispanic = 0, female =0, vote_2008 = 1)
+simZ_genY_white <- sim(Z_genY, x = setZ_genY_white)
+ci.plot(simZ_genY_white, ylim = 0:1, ylab = "Probability of voting", 
+        main = "White Millennial Man")
+#Now, Baby Boomer
+setZ_boomer_white <- setx(Z_boomer, income = 1:7, education = 2, black = 0, 
+                          hispanic = 0, female =0, vote_2008 = 1)
+simZ_boomer_white <- sim(Z_boomer, x = setZ_boomer_white)
+ci.plot(simZ_boomer_white, ylim = 0:1, ylab = "Probability of voting", 
+        main = "White Baby Boomer Man")
+```
+## How the model plays out in simulation (part 4) {.columns-2}
+It is clear there are little differences for this demographic across other generations as well.
+```{r, message=FALSE, echo = FALSE, fig.align='center', fig.show='hold', fig.width=3.5, fig.height=5}
 ci.plot(simZ_genY_white, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Millennial Man")
 Z_genX <- zelig(vote_2012 ~ education + female + vote_2008 + black + hispanic + income, model = "logit.survey", weights=~weights, strata=~strata, 
@@ -222,37 +158,23 @@ simZ_genX_white <- sim(Z_genX, x = setZ_genX_white)
 ci.plot(simZ_genY_white, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Gen X Man")
 ```
-
-```{r, echo=FALSE, message=FALSE, results='asis', out.width='.49\\linewidth', fig.width=3.5, fig.height=3.5, fig.align='center', fig.show='hold', warning=FALSE}
-ci.plot(simZ_genY_white, ylim = 0:1, ylab = "Probability of voting", 
-        main = "White Millennial Man")
-setZ_silent_white <- setx(Z_silent, income = 1:7, education = 2, black = 0, 
-                        hispanic = 0, female =0, vote_2008 = 0)
-simZ_silent_white <- sim(Z_silent, x = setZ_silent_white)
-ci.plot(simZ_genY_white, ylim = 0:1, ylab = "Probability of voting", 
-        main = "White Silent Generation Man")
-```
-
-The other variables that shows significant variation between generations in terms of substantive significance is past voting history. As was noted in the results section, the odds ratio for having voted in 2008 is positively statistically and substantively significant across all generations, but its intensity increases with the age of the generation, with the strongest effects observed for the Silent Generation. Those differences are clearly observed in the predicted-probability plots below, which continue use the same demographic as above but now assume that this person voted in 2008. 
-
-```{r, echo=FALSE, message=FALSE, results='asis', out.width='.49\\linewidth', fig.width=3.5, fig.height=3.5, fig.align='center', fig.show='hold', warning=FALSE}
-
+## How the model plays out in simulation (part 5) {.columns-2}
+Now assume that same white man voted in 2008, which makes a huge difference. 
+```{r, message=FALSE, echo = FALSE, fig.align='center', fig.show='hold', fig.width=3.5, fig.height=5}
 setZ_genY_voted <- setx(Z_genY, income = 1:7, education = 2, black = 0, 
                         hispanic = 0, female =0, vote_2008 = 1)
 simZ_genY_voted <- sim(Z_genY, x = setZ_genY_voted)
 ci.plot(simZ_genY_voted, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Millennial man who voted in '08")
-
 setZ_genX_voted <- setx(Z_genX, income = 1:7, education = 2, black = 0, 
                         hispanic = 0, female =0, vote_2008 = 1)
 simZ_genX_voted <- sim(Z_genX, x = setZ_genX_voted)
 ci.plot(simZ_genX_voted, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Gen X man who voted in '08")
 ```
-
-The difference in probability between Millennials and Generation X is clear, and it is due to the influence of past voting decisions in determining future turnout. Below we instead compare Generation X with Baby Boomers and then Baby Boomers with the Silent Generation to show how the predicted probability of voting in 2012 intensifies with age when assuming that the respondent voted in 2008. 
-
-```{r, echo=FALSE, message=FALSE, results='asis', out.width='.49\\linewidth', fig.width=3.5, fig.height=3.5, fig.align='center', fig.show='hold', warning=FALSE}
+## How the model plays out in simulation (part 5) {.columns-2}
+The effects of differences in voting history only increase with age. 
+```{r, message=FALSE, echo = FALSE, fig.align='center', fig.show='hold', fig.width=3.5, fig.height=5}
 ci.plot(simZ_genX_voted, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Gen X man who voted in '08")
 setZ_boomer_voted <- setx(Z_boomer, income = 1:7, education = 2, black = 0, 
@@ -261,8 +183,9 @@ simZ_boomer_voted <- sim(Z_boomer, x = setZ_boomer_voted)
 ci.plot(simZ_boomer_voted, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Baby Boomer man who voted in '08")
 ```
-
-```{r, echo=FALSE, message=FALSE, results='asis', out.width='.49\\linewidth', fig.width=3.5, fig.height=3.5, fig.align='center', fig.show='hold', warning=FALSE}
+## How the model plays out in simulation (part 6) {.columns-2}
+The effects of differences in voting history only increase with age. 
+```{r, message=FALSE, echo = FALSE, fig.align='center', fig.show='hold', fig.width=3.5, fig.height=5}
 ci.plot(simZ_boomer_voted, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Baby Boomer man who voted in '08")
 
@@ -271,52 +194,30 @@ setZ_silent_voted <- setx(Z_silent, income = 1:7, education = 2, black = 0,
 simZ_silent_voted <- sim(Z_silent, x = setZ_silent_voted)
 ci.plot(simZ_silent_voted, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Silent Generation man who voted in '08")
-
 ```
+     
+## Limitations 
 
-##VI. Goodness of Fit
-Receiver Operating Characteristic, or ROC Plots, help summarize how well a model for dichotomous outcome fits the actual. The closer the ROC curve is to the upper right corner of the plot, the better the fit of the model specification [@king2002estimating]. From this standpoint, the model fits all four generations far better than the diagonal line in each plot, which is how a model with little predictive power would appear. But there is still clearly significant difference between the predictive power of these models and an excellent model, which would extend closer to the upper right-hand corner. 
+>- Issues with external validity
+>- Relavtively low survey response 
+>- Self survey & self report
+>- Goodness of Fit  
 
-```{r, echo=FALSE, message=FALSE, results='asis', out.width='.49\\linewidth', fig.width=3.5, fig.height=3.5, fig.align='center', fig.show='hold', warning=FALSE}
-library(Zelig)
-rocplot(Z_genY, Z_boomer, col1 = 'blue', col2 = 'red', lty1="solid", lty2="solid",
-        xlab = "Proportion of voted correctly predicted", 
-        ylab = "Proportion of didn't vote correctly predicted")
-legend("bottomleft", c("Millennial","Baby Boomer"), 
+## Goodness of Fit (Likelihood-ratio test)
+Does the model with predictors fit significantly better than a model with just an intercept (a null model)? 
+```{r, echo=TRUE}
+with(M_genY, null.deviance - deviance) #gives chi-square value
+with(M_genY, df.null - df.residual) #gives degrees of freedom
+with(M_genY, pchisq(null.deviance - deviance, 
+                    df.null - df.residual, 
+                    lower.tail = FALSE)) #gives p value
+```
+## Goodness of Fit (ROC)
+Receiver operating characteristic plot
+```{r}
+
+rocplot(Z_genY, Z_boomer, col1 = 'blue', col2 = 'red')
+legend("left", c("Millennial","Baby Boomer"), 
        lty=c(1,1), lwd=c(2.5,2.5), col=c('blue','red'))
-rocplot(Z_genX, Z_silent, col1 = 'grey', col2 = 'brown', lty1="solid", lty2="solid",
-        xlab = "Proportion of voted correctly predicted", 
-        ylab = "Proportion of didn't vote correctly predicted")
-legend("bottomleft", c("Gen X","Silent Gen"), 
-       lty=c(1,1), lwd=c(2.5,2.5), col=c('grey','brown'))
+
 ```
-
-##VII. Limitations
-
-There are a number of limitations with our analysis and the dataset that was used. Foremost, only using 2012 to gain insight into voting indicators diminshes external validity. Ideally, panel data would be used to gain more externally valid insights into predictors. Additionally, past voting behavior in this survey, refered to the participants voting behavior in the year of 2008. The 2008 presidential election had record turnout, specifically among millennials and specifically among African-Americans. Using 2008 as a proxy for past voting behavior needs to be looked at critically as it probably overestimates past voting behavior. 
-
-Another limitation is the response rate which was approximately 49%, the lowest the ANES study has ever recorded. Due to this, there is an increased likelihood that non-response bias affected the estimates. There was also a fair amount of item non-response, meaning selected respondents participated but only provided partial answers to some basic questions - e.g. responding to questions about employment with "I don't know" or "refused to answer."
-
-With any household survey, there are important issues that can affect estimates, including non-response and item non-response (mentioned above) and the potential for measurment error. Measurement error refers to error among those reporting. Self survey (internet) and self report (face-to-face interview) are always vulnerable to this. Respondents can under-report, by misunderstanding a complicated question or thinking information may be passed on to tax authorities, or over-report due to human error or social desirability. Additionally, all estimates from sample surveys are subject to sampling variability. This has implications for inference about distributional comparisons, such as trends and differences. 
-
-##VIII. Conclusion 
-
-Our results partially confirm our initial predictions, but key predictors still show a large degree of consistency across generations. The impact of education as measured by exponentiated logit coefficients is indeed lower for Millennials than any other generation, but the results for this coefficient are not even statistically significant for Generation X. Additionally, past voting decisions play a far bigger role with age, as Millennials had the smallest factor-odds-change from past voting decisions. Being one of the two major racial minorities in the U.S. was a more substantively and statistically significant predictor for Millennials than any other generation. However, we were wrong about income, which proved to be just as valid, if not slightly more so, for Millennials relative to other generations. And gender was not a statisically significant factor for any generation, let alone Millennials. Still, income and education showed strong consistency across generations, while race and past voting decisions proved the most decisive factors. 
-
-The remaining variance in the model potentially speaks to contextual and systemic variables that are often not looked at in conjuction with individual level indicators. The closeness of the election, contextual socio-economic conditions, and registration laws have an impact on who goes to the polls. Registration laws could be of partiuclar importance as portions of the Voting Rights Act were recently struck down and newly (re)enforced restrictions for registering and voting disporoportionatly hurt minorities. Also, Millennials move more than past generations, and in the U.S. context this entails numerous obstacles, such as registering to vote again in the new place of residence [@benetsky2015young]. 
-
-Ultimately, the model still suffers from the problems that have faced every political scientist attempting to understand voter turnout: the ability to systematically predict and understand voter turnout [@matsusaka1999voter]. Even after decades of study, it is still a phenomenon with a large degree of unexplained variation. Future research will need to further explore other variables of relevance, particularly for Millennials, in order to reduce variance. Additionally, further research is needed to understand how a similar model would differ in off-year elections, given what we know about the demographics of participation in midterm elections. 
-
-BELOW ARE NOTES FROM ABOVE THAT I PLAN TO INCLUDE, JUST WANT TO WAIT UNTIL IT'S ALL TOGETHER TO DO IT. 
-
-we believe party identification will have less of an impact, given Millennials' disdain for the mobilizing effects of party identification. 
-
-Additionally, population size and electoral closeness, and population stability also have an influence.  whereas racial diversity was consistently negatively significant. The interplay between individual predictors and systemic predictors has yet to be fully explored.
-
-Other variables of interest include civic duty, which we believe will not have as strong of an impact owing to a greater sense of social dislocation among Millennials, which will also contribute to diminished impact of membership in traditional institutions (church, unions, etc.). Because of these factors, Millennials will have to feel an especially strong attachment to a candidate in a given election in order to vote, which is measurable using ANES, and contact from a political party will have an especially high impact [@kitchel2015they].
-
-
-
-
-# Bibliography
-
