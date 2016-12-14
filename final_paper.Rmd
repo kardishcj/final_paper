@@ -8,7 +8,7 @@ fig_caption: yes
 ---
 ##I. Introduction 
 
-Do tradiitonal indicators of voter turnout hold the same predictive power from one generation to the next? Do other potential indicators, such as race or gender, hold more predictive power for the Millennial generation? 
+Do traditional indicators of voter turnout hold the same predictive power from one generation to the next? Do other potential indicators, such as race or gender, hold more predictive power for the Millennial generation? 
  
 Traditionally, an individual's age is one of the most common predictors of differences in attitudes and behaviors, particularly when it comes to voting. In the United States, for the past 25 years, the Baby Boomer generation (1946-1964) was the defining vote in presidential and down-ballot elections. However, at 75.4 million people, Millennials now outnumber the Baby Boomers [@fry2015year]. 
  
@@ -153,6 +153,7 @@ Thus, being hispanic is a far stronger predictor of voter turnout for Millennial
 ##V. Predictions using the model results 
 
 Because of challenges using base R to run and store predictions, this section utilizes the Zelig package and its survey-weighted logit option. It will provide a number of plots showing the predicted probability of a given demographic makeup voting in the 2012 election, based on the model, across a number of different generations but using Millennials as a reference point. The first (below), compares the probability of voting in the 2012 election for a black woman of moderate income ($45,000-$65,000 a year) who did not vote in 2008 at various levels of education. 
+
 ```{r, echo=FALSE, message=FALSE, results='asis', out.width='.49\\linewidth', fig.width=3.5, fig.height=3.5, fig.align='center', fig.show='hold', warning=FALSE}
 library(MASS)
 library(dplyr)
@@ -203,7 +204,9 @@ simZ_boomer_white <- sim(Z_boomer, x = setZ_boomer_white)
 ci.plot(simZ_boomer_white, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Baby Boomer Man")
 ```
+
 In the case of white men with only a high-school education the model predicts essentially the same starting point of around 37 percent for Millennials and Baby Boomers at the lowest income range of 0-$25,000. But the Millennial in this case quickly surpasses the Baby Boomer in probability of voting in 2012, even if not by a substantial percentage, ultimately topping out at about 60 percent at the highest level of income. This likely reflects the heightened importance of income for the Millennials in terms of predicting 2012 voter turnout. Still, the difference is only slight, and the differences between Millennials and the other two generations for this demographic are similarly quite minor. They are shown below.
+
 ```{r, echo=FALSE, message=FALSE, results='asis', out.width='.49\\linewidth', fig.width=3.5, fig.height=3.5, fig.align='center', fig.show='hold', warning=FALSE}
 ci.plot(simZ_genY_white, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Millennial Man")
@@ -226,7 +229,9 @@ simZ_silent_white <- sim(Z_silent, x = setZ_silent_white)
 ci.plot(simZ_genY_white, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Silent Generation Man")
 ```
+
 The other variables that shows significant variation between generations in terms of substantive significance is past voting history. As was noted in the results section, the odds ratio for having voted in 2008 is positively statistically and substantively significant across all generations, but its intensity increases with the age of the generation, with the strongest effects observed for the Silent Generation. Those differences are clearly observed in the predicted-probability plots below, which continue use the same demographic as above but now assume that this person voted in 2008. 
+
 ```{r, echo=FALSE, message=FALSE, results='asis', out.width='.49\\linewidth', fig.width=3.5, fig.height=3.5, fig.align='center', fig.show='hold', warning=FALSE}
 
 setZ_genY_voted <- setx(Z_genY, income = 1:7, education = 2, black = 0, 
@@ -241,7 +246,9 @@ simZ_genX_voted <- sim(Z_genX, x = setZ_genX_voted)
 ci.plot(simZ_genX_voted, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Gen X man who voted in '08")
 ```
+
 The difference in probability between Millennials and Generation X is clear, and it is due to the influence of past voting decisions in determining future turnout. Below we instead compare Generation X with Baby Boomers and then Baby Boomers with the Silent Generation to show how the predicted probability of voting in 2012 intensifies with age when assuming that the respondent voted in 2008. 
+
 ```{r, echo=FALSE, message=FALSE, results='asis', out.width='.49\\linewidth', fig.width=3.5, fig.height=3.5, fig.align='center', fig.show='hold', warning=FALSE}
 ci.plot(simZ_genX_voted, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Gen X man who voted in '08")
@@ -263,8 +270,10 @@ ci.plot(simZ_silent_voted, ylim = 0:1, ylab = "Probability of voting",
         main = "White Silent Generation man who voted in '08")
 
 ```
+
 ##VI. Goodness of Fit
 Receiver Operating Characteristic, or ROC Plots, help summarize how well a model for dichotomous outcome fits the actual. The closer the ROC curve is to the upper right corner of the plot, the better the fit of the model specification [@king2002estimating]. From this standpoint, the model fits all four generations far better than the diagonal line in each plot, which is how a model with little predictive power would appear. But there is still clearly significant difference between the predictive power of these models and an excellent model, which would extend closer to the upper right-hand corner. 
+
 ```{r, echo=FALSE, message=FALSE, results='asis', out.width='.49\\linewidth', fig.width=3.5, fig.height=3.5, fig.align='center', fig.show='hold', warning=FALSE}
 library(Zelig)
 rocplot(Z_genY, Z_boomer, col1 = 'blue', col2 = 'red', lty1="solid", lty2="solid",
@@ -278,6 +287,7 @@ rocplot(Z_genX, Z_silent, col1 = 'grey', col2 = 'brown', lty1="solid", lty2="sol
 legend("bottomleft", c("Gen X","Silent Gen"), 
        lty=c(1,1), lwd=c(2.5,2.5), col=c('grey','brown'))
 ```
+
 ##VII. Limitations
 
 There are a number of limitations with our analysis and the dataset that was used. Foremost, only using 2012 to gain insight into voting indicators diminshes external validity. Ideally, panel data would be used to gain more externally valid insights into predictors. Additionally, past voting behavior in this survey, refered to the participants voting behavior in the year of 2008. The 2008 presidential election had record turnout, specifically among millennials and specifically among African-Americans. Using 2008 as a proxy for past voting behavior needs to be looked at critically as it probably overestimates past voting behavior. 
