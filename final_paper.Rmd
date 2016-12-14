@@ -1,5 +1,5 @@
 ---
-title: "Final_Paper"
+title: "Is age just a number? Comparing predictors of voter turnout across generations"
 author: "Chris Kardish, Marie Agosta"
 date: "December 8, 2016"
 output: pdf_document
@@ -73,7 +73,6 @@ Additionally, the role women play in social, political, and economic life has ch
 ##IV. Results 
 
 The results are presented both as they appear in logistic regression ouput (Figure 1) for basic interpretation of the coefficients, but owing to the challenge of interpreting substantive significance from log odds, a table of the same coefficients in exponential form is provided (Figure 3) to show the same results as odds ratios. Confidence intervals are supplied for both the log-odd coefficients (Figure 2) and for odds ratios (Figure 4).  
-
 ```{r, include=FALSE}
 #setwd('C:/Users/Chris/Documents/GitHub/final_paper')
 #setwd('C:/Users/Chris/Documents/R/col_soc_science')
@@ -90,8 +89,8 @@ stargazer(M_genY, M_genX, M_boomer, M_silent,
           title = "Log Odds Across Four Generations")
 
 ```
-```{r, echo=FALSE, fig.cap='Figure 2: Confidence Intervals of Log Odds'}
 
+```{r, echo=FALSE}
 library(knitr)
 conf_intervals <- cbind(confint(M_genY), confint(M_genX), confint(M_boomer), 
                         confint(M_silent))
@@ -105,14 +104,12 @@ conf_intervals$silent <- paste(conf_intervals$`7`, conf_intervals$`8`, sep=",")
 varnames <- c("Intercept", "education", "female", "vote_2008", "black", "hispanic", "income")
 conf_intervals_kab <- cbind(varnames, conf_intervals$gen_Y, conf_intervals$gen_X,
                         conf_intervals$boomer, conf_intervals$silent)
-
 kable(conf_intervals_kab, format = 'markdown', col.names = c("Coefficients", "Gen Y", 
                 "Gen X", "Boomer", "Silent"), 
-      caption = "Figure 2: Confidence Intervals of Log Odds")
-
+      caption = "Figure 3: Confidence Intervals of Model")
 ```
 
-The results in Tables 1 and 2 show a considerable degree of consistency across generations. The effect of an additional level of education or income has a similar positive, statistically significant, and substantively significant relationship with voter turnout across generations. The lone exception is education among Generation X, but as seen in Table 2, the confidence interval does not quite include zero within its range. Still, it is considered statistically insignificant for Generation X. The effect of being a woman is also generally consistent across generations, though not statistically significant, while the effect of past voting behavior (vote_2008) is positive across all generations but varies in terms of the strength of the effect, as will be made clearer below when viewing the exponentiated coefficients. 
+The results in Table 1 and its confidence intervals below it show a considerable degree of consistency across generations. The effect of an additional level of education or income has a similar positive, statistically significant, and substantively significant relationship with voter turnout across generations. The lone exception is education among Generation X, which is narrowly statistically insignificant, as seen in the confidence intervals below Table 1. The effect of being a woman is also generally consistent across generations, though not statistically significant, while the effect of past voting behavior (vote_2008) is positive across all generations but varies in terms of the strength of the effect, as will be made clearer below when viewing the exponentiated coefficients. 
 
 The greatest variation between generations can be found in the effects of race, and those effects are not uniformly statistically significant across generations. The effect of being black or hispanic is positive and significant for Millennials, while the effect of being hispanic is not statistically significant or positive for any other generation. The effect of being black is also statistically significant for Baby Boomers and the Silent Generation, but the substantive significance is markedly different: the effect is negative for Baby Boomers but strongly positive among the Silent Generation, even more substantively significant than for Millennials. 
 
@@ -123,10 +120,8 @@ stargazer(M_genY, M_genX, M_boomer, M_silent, apply.coef = exp,
          dep.var.labels = "Probability of voting in 2012", 
           column.labels = c("Gen Y", "Gen X", "Boomers", "Silent"),
           title = "Odds Ratios Across Four Generations")
-
 ```
 ```{r, echo=FALSE}
-
 conf_intervals_exp <- cbind(exp(confint(M_genY)), exp(confint(M_genX)), 
                             exp(confint(M_boomer)), exp(confint(M_silent)))
 conf_intervals_exp <- round(conf_intervals_exp, digits = 3)
@@ -138,11 +133,12 @@ conf_intervals_exp$boomer <- paste(conf_intervals_exp$`5`, conf_intervals_exp$`6
 conf_intervals_exp$silent <- paste(conf_intervals_exp$`7`, conf_intervals_exp$`8`, sep=",")
 conf_intervals_exp_kab <- cbind(varnames, conf_intervals_exp$gen_Y, conf_intervals_exp$gen_X,
                         conf_intervals_exp$boomer, conf_intervals_exp$silent)
-kable(conf_intervals_exp_kab, format = 'markdown', col.names = c("Coefficients", "Gen Y", "Gen X", "Boomers", "Silent"), caption = "Figure 4: Confidence Intervals of Odds Ratios")
-
+kable(conf_intervals_exp_kab, format = 'markdown', 
+      col.names = c("Coefficients", "Gen Y", "Gen X", "Boomers", "Silent"), 
+      caption = "Figure 4: Confidence Intervals of Odds Ratios")
 ```
 
-The above findings are simply reinforced when observing the exponentiated coefficients (Table 3), but their substantive impact is easier to interpret. An additional level of education increases the odds of voting 1.32 times for Millennials, and similarly across all generations. Recall that there are five levels of education, ranging from below high school to graduate-level. An additional level of income increases the odds of voting 1.22 times for Millennials and by a similar factor across all generations. Recall that there are 7 levels of income ranges, from $0-$20,000 per year to $250,000 or above. 
+The above findings are simply reinforced when observing the exponentiated coefficients (Table 3 and its confidence intervals below it), but their substantive impact is easier to interpret. An additional level of education increases the odds of voting 1.32 times for Millennials, and similarly across all generations. Recall that there are five levels of education, ranging from below high school to graduate-level. An additional level of income increases the odds of voting 1.22 times for Millennials and by a similar factor across all generations. Recall that there are 7 levels of income ranges, from $0-$20,000 per year to $250,000 or above. 
 
 However, it is also true that the odds-ratio of education for Millennials is slightly weaker than that of any other generation, which may reflect diminishing returns of the predictive power of a university education for this generation, which is the best educated of any in American history in terms of bachelor's degree attainment. The gains from a university education grow with the age of the generation, with the strongest odds for the Silent Generation. The effect of income, on the other hand, is stronger for Millennials than any generation other than the Silent Generation, with Generation X and Baby Boomers showing the smallest effects. 
 
@@ -154,18 +150,19 @@ Thus, being hispanic is a far stronger predictor of voter turnout for Millennial
 
 Because of challenges using base R to run and store predictions, this section utilizes the Zelig package and its survey-weighted logit option. It will provide a number of plots showing the predicted probability of a given demographic makeup voting in the 2012 election, based on the model, across a number of different generations but using Millennials as a reference point. The first (below), compares the probability of voting in the 2012 election for a black woman of moderate income ($45,000-$65,000 a year) who did not vote in 2008 at various levels of education. 
 
-```{r, echo=FALSE, message=FALSE, results='asis', out.width='.49\\linewidth', fig.width=3.5, fig.height=3.5, fig.align='center', fig.show='hold', warning=FALSE}
-library(MASS)
-library(dplyr)
+```{r, include=FALSE, warning=FALSE, message=FALSE}
 library(Zelig)
-#Steps. 1) run model but using Zelig, which is able to use survey weights
-#2) use "setx" function to set the values for the simulation
-#3) run the simulation using the parameters you specified (sim)
-#4) plot using ci.plot
-
 Z_genY <- zelig(vote_2012 ~ education + female + vote_2008 + black + hispanic + income, model = "logit.survey", weights=~weights, strata=~strata, data = anes_genY)
 Z_boomer <- zelig(vote_2012 ~ education + female + vote_2008 + black + hispanic + income, model = "logit.survey", weights=~weights, strata=~strata, 
                   data = anes_boomer)
+Z_silent <- zelig(vote_2012 ~ education + female + vote_2008 + black + hispanic + income, model = "logit.survey", weights=~weights, strata=~strata, 
+                  data = anes_silent)
+Z_genX <- zelig(vote_2012 ~ education + female + vote_2008 + black + hispanic + income, model = "logit.survey", weights=~weights, strata=~strata, 
+                  data = anes_genX)
+```
+
+```{r, echo=FALSE, message=FALSE, results='asis', out.width='.49\\linewidth', fig.width=3.5, fig.height=3.5, fig.align='center', fig.show='hold', warning=FALSE}
+
 setZ_genY_black <- setx(Z_genY, education = 1:5, black = 1, hispanic = 0, 
                         income = 3, female = 1, vote_2008 = 0)
 simZ_genY_black <- sim(Z_genY, x = setZ_genY_black)
@@ -181,8 +178,6 @@ The simulation gives a visual sense of the impact of the statistically and subst
 ```{r, echo=FALSE, message=FALSE, results='asis', out.width='.49\\linewidth', fig.width=3.5, fig.height=3.5, fig.align='center', fig.show='hold', warning=FALSE}
 ci.plot(simZ_genY_black, ylim = 0:1, ylab = "Probability of voting", 
         main = "Black Millennial Woman")
-Z_silent <- zelig(vote_2012 ~ education + female + vote_2008 + black + hispanic + income, model = "logit.survey", weights=~weights, strata=~strata, 
-                  data = anes_silent)
 setZ_silent_black <- setx(Z_silent, education = 1:5, black = 1, hispanic = 0, 
                         income = 3, female = 1, vote_2008 = 0)
 simZ_silent_black <- sim(Z_silent, x = setZ_silent_black)
@@ -191,7 +186,6 @@ ci.plot(simZ_silent_black, ylim = 0:1, ylab = "Probability of voting",
 ```
 We now turn to another demographic. Below are the predicted probabilities of voting in 2012 for a white male with a high school education who did not vote in 2008 across various all levels of income included in the data set.
 ```{r, echo=FALSE, message=FALSE, results='asis', out.width='.49\\linewidth', fig.width=3.5, fig.height=3.5, fig.align='center', fig.show='hold', warning=FALSE}
-
 setZ_genY_white <- setx(Z_genY, income = 1:7, education = 2, black = 0, 
                         hispanic = 0, female =0, vote_2008 = 0)
 simZ_genY_white <- sim(Z_genY, x = setZ_genY_white)
@@ -210,9 +204,6 @@ In the case of white men with only a high-school education the model predicts es
 ```{r, echo=FALSE, message=FALSE, results='asis', out.width='.49\\linewidth', fig.width=3.5, fig.height=3.5, fig.align='center', fig.show='hold', warning=FALSE}
 ci.plot(simZ_genY_white, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Millennial Man")
-Z_genX <- zelig(vote_2012 ~ education + female + vote_2008 + black + hispanic + income, model = "logit.survey", weights=~weights, strata=~strata, 
-                  data = anes_genX)
-
 setZ_genX_white <- setx(Z_genX, income = 1:7, education = 2, black = 0, 
                         hispanic = 0, female =0, vote_2008 = 0)
 simZ_genX_white <- sim(Z_genX, x = setZ_genX_white)
@@ -275,7 +266,6 @@ ci.plot(simZ_silent_voted, ylim = 0:1, ylab = "Probability of voting",
 Receiver Operating Characteristic, or ROC Plots, help summarize how well a model for dichotomous outcome fits the actual situation. The closer the ROC curve is to the upper right corner of the plot, the better the fit of the model specification [@king2002estimating]. From this standpoint, the model fits all four generations far better than the diagonal line in each plot, which is how a model with little predictive power would appear. But there is still clearly significant difference between the predictive power of these models and an excellent model, which would extend closer to the upper right-hand corner. 
 
 ```{r, echo=FALSE, message=FALSE, results='asis', out.width='.49\\linewidth', fig.width=3.5, fig.height=3.5, fig.align='center', fig.show='hold', warning=FALSE}
-library(Zelig)
 rocplot(Z_genY, Z_boomer, col1 = 'blue', col2 = 'red', lty1="solid", lty2="solid",
         xlab = "Proportion of voted correctly predicted", 
         ylab = "Proportion of didn't vote correctly predicted")
