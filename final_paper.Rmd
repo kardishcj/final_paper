@@ -1,5 +1,5 @@
 ---
-title: "final_paper"
+title: "Final_Paper"
 author: "Chris Kardish, Marie Agosta"
 date: "December 8, 2016"
 output: pdf_document
@@ -272,7 +272,7 @@ ci.plot(simZ_silent_voted, ylim = 0:1, ylab = "Probability of voting",
 ```
 
 ##VI. Goodness of Fit
-Receiver Operating Characteristic, or ROC Plots, help summarize how well a model for dichotomous outcome fits the actual. The closer the ROC curve is to the upper right corner of the plot, the better the fit of the model specification [@king2002estimating]. From this standpoint, the model fits all four generations far better than the diagonal line in each plot, which is how a model with little predictive power would appear. But there is still clearly significant difference between the predictive power of these models and an excellent model, which would extend closer to the upper right-hand corner. 
+Receiver Operating Characteristic, or ROC Plots, help summarize how well a model for dichotomous outcome fits the actual situation. The closer the ROC curve is to the upper right corner of the plot, the better the fit of the model specification [@king2002estimating]. From this standpoint, the model fits all four generations far better than the diagonal line in each plot, which is how a model with little predictive power would appear. But there is still clearly significant difference between the predictive power of these models and an excellent model, which would extend closer to the upper right-hand corner. 
 
 ```{r, echo=FALSE, message=FALSE, results='asis', out.width='.49\\linewidth', fig.width=3.5, fig.height=3.5, fig.align='center', fig.show='hold', warning=FALSE}
 library(Zelig)
@@ -302,17 +302,16 @@ Our results partially confirm our initial predictions, but key predictors still 
 
 The remaining variance in the model potentially speaks to contextual and systemic variables that are often not looked at in conjuction with individual level indicators. The closeness of the election, contextual socio-economic conditions, and registration laws have an impact on who goes to the polls. Registration laws could be of partiuclar importance as portions of the Voting Rights Act were recently struck down and newly (re)enforced restrictions for registering and voting disporoportionatly hurt minorities. Also, Millennials move more than past generations, and in the U.S. context this entails numerous obstacles, such as registering to vote again in the new place of residence [@benetsky2015young]. 
 
+Additionally, population size and electoral closeness, racial divesity, and population stability also have an influence. This mulitidude of potential factors is of partiuclar importance in the United States, where the government is highly centralized in some regards, highly decentralized in others, racially diverse, and the aggregate population is quite large. 
+ 
+given Millennials' disdain for the mobilizing effects of party identification. Other variables of interest include civic duty, which we believe will not have as strong of an impact owing to a greater sense of social dislocation among Millennials, which will also contribute to diminished impact of membership in traditional institutions (church, unions, etc.). Because of these factors, Millennials will have to feel an especially strong attachment to a candidate in a given election in order to vote, which is measurable using ANES, and contact from a political party will have an especially high impact [@kitchel2015they].
+
 Ultimately, the model still suffers from the problems that have faced every political scientist attempting to understand voter turnout: the ability to systematically predict and understand voter turnout [@matsusaka1999voter]. Even after decades of study, it is still a phenomenon with a large degree of unexplained variation. Future research will need to further explore other variables of relevance, particularly for Millennials, in order to reduce variance. Additionally, further research is needed to understand how a similar model would differ in off-year elections, given what we know about the demographics of participation in midterm elections. 
 
-BELOW ARE NOTES FROM ABOVE THAT I PLAN TO INCLUDE, JUST WANT TO WAIT UNTIL IT'S ALL TOGETHER TO DO IT. 
+ 
 
-we believe party identification will have less of an impact, given Millennials' disdain for the mobilizing effects of party identification. 
 
-Additionally, population size and electoral closeness, and population stability also have an influence.  whereas racial diversity was consistently negatively significant. The interplay between individual predictors and systemic predictors has yet to be fully explored.
 
-Other variables of interest include civic duty, which we believe will not have as strong of an impact owing to a greater sense of social dislocation among Millennials, which will also contribute to diminished impact of membership in traditional institutions (church, unions, etc.). Because of these factors, Millennials will have to feel an especially strong attachment to a candidate in a given election in order to vote, which is measurable using ANES, and contact from a political party will have an especially high impact [@kitchel2015they].
-
-test 
 
 
 # Bibliography
