@@ -55,28 +55,57 @@ Millennials will play an increasingly significant role in U.S. elections as they
 **6.) Gender was not a statisically significant factor for any generation, let alone Millennials. Still, income and education showed**   
     **strong consistency across generations, while race and past voting decisions proved the most decisive factors.**
 
+
+```{r, echo=FALSE, include=FALSE, message=FALSE}
+library(Zelig)
+Z_genY <- zelig(vote_2012 ~ education + female + vote_2008 + black + hispanic + income, model = "logit.survey", weights=~weights, strata=~strata, data = anes_genY)
+Z_boomer <- zelig(vote_2012 ~ education + female + vote_2008 + black + hispanic + income, model = "logit.survey", weights=~weights, strata=~strata, 
+                  data = anes_boomer)
+Z_silent <- zelig(vote_2012 ~ education + female + vote_2008 + black + hispanic + income, model = "logit.survey", weights=~weights, strata=~strata, 
+                  data = anes_silent)
+Z_genX <- zelig(vote_2012 ~ education + female + vote_2008 + black + hispanic + income, model = "logit.survey", weights=~weights, strata=~strata, 
+                  data = anes_genX)
+```
+```{r, message=FALSE, echo = FALSE, fig.align='center', fig.show='hold', fig.width=4, fig.height=5}
+setZ_genY_black <- setx(Z_genY, education = 1:5, black = 1, hispanic = 0, 
+                        income = 3, female = 1, vote_2008 = 0)
+simZ_genY_black <- sim(Z_genY, x = setZ_genY_black)
+ci.plot(simZ_genY_black, ylim = 0:1, ylab = "Probability of voting", 
+        main = "Black Millennial Woman")
+setZ_boomer_black <- setx(Z_boomer, education = 1:5, black = 1, hispanic = 0, 
+                          income = 3, female = 1, vote_2008 = 0)
+simZ_boomer_black <- sim(Z_boomer, x = setZ_boomer_black)
+ci.plot(simZ_boomer_black, ylim = 0:1, ylab = "Probability of voting", 
+        main = "Black Baby Boomer Woman")
+```
+ 
+
 # Methodology & Choice of Data 
 
-We use a logistic regression to assess the strength of various predictors on the likelihood that a given respondent voted in 2012. Thus, we use a binary dependent variable, also known as a dummy variable, coded "1" if the respondent did vote in 2012 and 0 if not. We run the same model but for different age bands. This allows us to discern differences in predictive power across age groups. 
+**We use a logistic regression to assess the strength of various predictors on the likelihood that a given respondent voted in 2012. Thus, we use a binary dependent variable, also known as a dummy variable, coded "1" if the respondent did vote in 2012 and 0 if not. We run the same model but for different age bands. This allows us to discern differences in predictive power across age groups.**  
 
 The variables included in the model are:
 
-*Education* - a numeric variable consisting of the following levels of attainment: 1) below high school 2) high school 3) some post-high-school education 4) a bachelor's degree 5) a graduate degree. 
+  *Education* - a numeric variable consisting of the following levels of attainment: 1) below high school 2) high school 3) some     
+                post-high-school education 4) a bachelor's degree 5) a graduate degree. 
 
-*Income* - a numeric variable whose categories are: 1) under $20,000 per year 2) $20,000 to $45,000 per year 3) $45,000 to $65,000 per year 4) $65,000 to $90,000 per year 5) $90,000 to $125,000 per year 6) $125,000 to $250,000 per year 7) $250,000 or more per year.  
+  *Income* - a numeric variable whose categories are: 1) under $20,000 per year 2) $20,000 to $45,000 per year 3) $45,000 to $65,000 per   
+             year 4) $65,000 to $90,000 per year 5) $90,000 to $125,000 per year 6) $125,000 to $250,000 per year 7) $250,000 or more per 
+             year.  
 
-*Vote_2008* - a dummy variable indicating whether the respondent voted in 2008 or not. 
+  *Vote_2008* - a dummy variable indicating whether the respondent voted in 2008 or not. 
 
-*Black* - a dummy variable indicating whether the respondent is black or not. 
+  *Black* - a dummy variable indicating whether the respondent is black or not. 
 
-*Hispanic* - a dummy variable indicating whether the respondent is hispanic or not. 
+  *Hispanic* - a dummy variable indicating whether the respondent is hispanic or not. 
 
-*Female* - a dummy variable indicating whether someone is a woman or not. 
+  *Female* - a dummy variable indicating whether someone is a woman or not. 
 
 
 **Choice of Data**
 
-The source we used was the 2012 Time Series Study from American National Election Studies (ANES), 
+The source we used was the 2012 Time Series Study from American National Election Studies (ANES)
+
 * A joint Stanford University and University of Michigan collaboration  This study has been 
 * Conducted annually since 1948 
 * Produced a sizable (62MB) panel survey of approximately 6,000 respondents who answered two sets of questions on two separate occasions,   
@@ -107,7 +136,7 @@ stargazer(M_genY, M_genX, M_boomer, M_silent, apply.coef = exp,
 Row
 -------------------------------------
 
-### Chart 2
+### Black Babyboomer and Black Millennial 
 
 ```{r, echo=FALSE, include=FALSE, message=FALSE}
 library(Zelig)
@@ -150,9 +179,14 @@ ci.plot(simZ_silent_black, ylim = 0:1, ylab = "Probability of voting",
 
 # Limitations 
 
-There are a number of limitations with our analysis and the dataset that was used. Foremost, only using 2012 to gain insight into voting indicators diminshes external validity. Ideally, panel data would be used to gain more externally valid insights into predictors. Additionally, past voting behavior in this survey, refered to the participants voting behavior in the year of 2008. The 2008 presidential election had record turnout, specifically among millennials and specifically among African-Americans. Using 2008 as a proxy for past voting behavior needs to be looked at critically as it probably overestimates past voting behavior. 
+**Data and the humans who use it are scarcely pefect, here are some limitations to our data, our approach, and our inferences:**
 
-Another limitation is the response rate which was approximately 49%, the lowest the ANES study has ever recorded. Due to this, there is an increased likelihood that non-response bias affected the estimates. There was also a fair amount of item non-response, meaning selected respondents participated but only provided partial answers to some basic questions - e.g. responding to questions about employment with "I don't know" or "refused to answer."
+* Only using 2012 to gain insight into voting indicators diminshes external validity. Ideally, panel data would be used to gain more    
+  externally valid insights into predictors. 
+  
+* Past voting behavior in this survey, refered to the participants voting behavior in the year of 2008. The 2008 presidential election had    record turnout, specifically among millennials and specifically among African-Americans. Using 2008 as a proxy for past voting behavior     needs to be looked at critically as it probably overestimates past voting behavior. 
 
-With any household survey, there are important issues that can affect estimates, including non-response and item non-response (mentioned above) and the potential for measurment error. Measurement error refers to error among those reporting. Self survey (internet) and self report (face-to-face interview) are always vulnerable to this. Respondents can under-report, by misunderstanding a complicated question or thinking information may be passed on to tax authorities, or over-report due to human error or social desirability. Additionally, all estimates from sample surveys are subject to sampling variability. This has implications for inference about distributional comparisons, such as trends and differences. 
+* The response rate was approximately 49%, the lowest the ANES study has ever recorded. Due to this, there is an increased likelihood that    non-response bias affected the estimates. There was also a fair amount of item non-response, meaning selected respondents participated but   only provided partial answers to some basic questions - e.g. responding to questions about employment with "I don't know" or "refused to    answer."
+
+* With any household survey, there are important issues that can affect estimates, including non-response and item non-response (mentioned    above) and the potential for measurment error. Measurement error refers to error among those reporting. Self survey (internet) and self     report (face-to-face interview) are always vulnerable to this. Respondents can under-report, by misunderstanding a complicated question or   thinking information may be passed on to tax authorities, or over-report due to human error or social desirability. 
 
