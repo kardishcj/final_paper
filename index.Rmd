@@ -5,7 +5,7 @@ output:
   flexdashboard::flex_dashboard:
     vertical_layout: scroll
     orientation: rows
-
+    
 ---
 
 ```{r setup, include=FALSE}
@@ -17,11 +17,9 @@ library("flexdashboard")
 
 ```
 
-
-
 -----------------------------------------------------------------------
 
-# Project Basics
+# Executive Summary 
 
 **In the US, do traditional indicators of individual voter turnout hold the same predictive power across generations? Are there insightful differences when it comes to the Millennial generation?** 
 
@@ -37,7 +35,7 @@ Traditional indicators of voter turnout:
 
 Approximately **69.2 million Millenials** are of voting age and are eligible to vote, making them the largest share of eligible voters yet only 45-50% of them typically vote. Millenials are demographically much more diverse than previous generations and came of age in a very secular and technology driven world 
 
-# Methodology 
+# Methodology & Choice of Data 
 
 We opted for a logit model because we want to assess if traditional indicators hold the same predictive power across generations. Our dependent variable is binary: 0 - did not vote in 2012, 1 - voted in 2012. 
 
@@ -48,7 +46,7 @@ Independent variables (same model across 4 generations) are:
 - race (black and hispanic dummies)
 - whether respondent voted in 2008 
 
-# Choice of Data 
+**Choice of Data**
 
 - American National Election Studies 
 - Face to face and internet survey, N = 4,505
@@ -60,7 +58,7 @@ Independent variables (same model across 4 generations) are:
 - Weighted survey 
 
 
-# Plots 
+# Plots and Results 
 
 Row
 -------------------------------------
@@ -122,6 +120,6 @@ ci.plot(simZ_silent_black, ylim = 0:1, ylab = "Probability of voting",
         main = "Black Silent Generation Woman")
 ```
 
-
+# Limitations 
 
 
