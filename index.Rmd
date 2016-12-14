@@ -1,37 +1,36 @@
 ---
-title: "index"
+title: "Webpage"
 author: "me"
-date: "12/12/2016"
-output: html_document
-theme: journal
-toc: true
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    social: menu
+    source_code: embed
+runtime: shiny
 
 ---
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 #setwd('C:/Users/Chris/Documents/GitHub/final_paper')
 source("cleaning_final.R")
 #rm(list = ls()) 
+library("flexdashboard")
+```
+
+Inputs {.sidebar}
+-----------------------------------------------------------------------
+
+```{r}
+ selectInput("clusterNum", label = ("Basic_Information"), 
+    choices = list("1" = 1, "2" = 2, "3" = 3, "4" = 4, "5" = 5), 
+    selected = 1)
 ```
 
 ## Research Question 
 
-
-
  **In the US, do traditional indicators of individual voter turnout hold the same predictive power across generations?** 
 
-Traditional indicators of voter turnout: 
-
-- income 
-- age
-- occupation
-- education 
-- Past voting decisions
-
-For example, education is a traditional indicator used to assess the liklihood that you'll vote, but how strong is it for the Millenials compared to Baby Boomers? Are there other variables that would hold more predictive power for Millenials, such as race or gender? 
-
-## Why it matters
+Traditional indicators of voter turnout: income, age, occupation, education, past voting decisions
 
 Approximately **69.2 million Millenials** are of voting age and are eligible to vote, making them the largest share of eligible voters. Yet...
 
@@ -39,40 +38,19 @@ Approximately **69.2 million Millenials** are of voting age and are eligible to 
 - In the 2012 presidential election, 46% voted 
 - In the 2016 presidential election, had only millennials voted, Clinton would've won the election in a landslide - 473 electoral votes to Trump's 32.
 
-And... 
+```{r}
+ selectInput("clusterNum", label = h3("Cluster number"), 
+    choices = list("1" = 1, "2" = 2, "3" = 3, "4" = 4, "5" = 5), 
+    selected = 1)
+```
 
-- Millenials are demographically much more diverse than previous generations  
-- Millenials came of age in a very secular and technology driven world 
 
-## Methodology 
+Row
+-----------------------------------------------------------------------
 
-We opted for a logit model because we want to assess if traditional indicators hold the same predictive power across generations.   
+### Odds-Ratios
 
-Our dependent variable is binary: 0 - did not vote in 2012, 1 - voted in 2012. 
-
-Independent variables (same model across 4 generations) are: 
-
-- education
-- gender (female dummy)
-- income
-- race (black and hispanic dummies)
-- whether respondent voted in 2008 
-
-## Choice of Data 
-
-- American National Election Studies 
-- Face to face and internet survey, N = 4,505
-- Response Rates: 
-    + Face-to-face: 38 percent
-    + Online: 2 percent
-- Over 1,900 variables
-- Conducted in English and Spanish 
-- Weighted survey 
-
-## Model results {.flexbox .vcenter .smaller} 
- 
--Expressed as odds-ratios (exponentiated coefficients), so
-can be interpreted as factor change in odds of voting in 2012
+    
 ```{r echo = FALSE, results='asis', message=FALSE,}
 #setwd('C:/Users/Chris/Documents/GitHub/Final_Presentation')
 library(stargazer)
@@ -82,9 +60,13 @@ stargazer(M_genY, M_genX, M_boomer, M_silent, apply.coef = exp,
           column.labels = c("Gen Y", "Gen X", "Boomers", "Silent"),
           title = "Odds Ratios Across Four Generations")
 ```
+```
+    
+Row {.tabset}
+-----------------------------------------------------------------------
 
-## How the model plays out in simulation {.columns-2}
-Predicted probabilities of voting for a black woman of moderate income across various levels of education, assuming she didn't vote in 2008. 
+### Black Women, Moderate Income 
+
 ```{r, echo=FALSE, include=FALSE, message=FALSE}
 library(Zelig)
 Z_genY <- zelig(vote_2012 ~ education + female + vote_2008 + black + hispanic + income, model = "logit.survey", weights=~weights, strata=~strata, data = anes_genY)
@@ -107,8 +89,9 @@ simZ_boomer_black <- sim(Z_boomer, x = setZ_boomer_black)
 ci.plot(simZ_boomer_black, ylim = 0:1, ylab = "Probability of voting", 
         main = "Black Baby Boomer Woman")
 ```
-## How the model plays out in simulation (part 2) {.columns-2}
-Using the same demographic, but this time showing the difference between Millennials and the Silent Generation. 
+
+### Other plot 
+
 ```{r, message=FALSE, echo = FALSE, fig.align='center', fig.show='hold', fig.width=3.5, fig.height=5}
 ci.plot(simZ_genY_black, ylim = 0:1, ylab = "Probability of voting", 
         main = "Black Millennial Woman")
@@ -118,8 +101,46 @@ simZ_silent_black <- sim(Z_silent, x = setZ_silent_black)
 ci.plot(simZ_silent_black, ylim = 0:1, ylab = "Probability of voting", 
         main = "Black Silent Generation Woman")
 ```
-## How the model plays out in simulation (part 3) {.columns-2}
-Predicted probabilities of voting for a white, high-school-educated man across levels of income, assuming he didn't vote in 2008. 
+
+### different
+
+```{r, echo=FALSE, include=FALSE, message=FALSE}
+library(Zelig)
+Z_genY <- zelig(vote_2012 ~ education + female + vote_2008 + black + hispanic + income, model = "logit.survey", weights=~weights, strata=~strata, data = anes_genY)
+Z_boomer <- zelig(vote_2012 ~ education + female + vote_2008 + black + hispanic + income, model = "logit.survey", weights=~weights, strata=~strata, 
+                  data = anes_boomer)
+Z_silent <- zelig(vote_2012 ~ education + female + vote_2008 + black + hispanic + income, model = "logit.survey", weights=~weights, strata=~strata, 
+                  data = anes_silent)
+Z_genX <- zelig(vote_2012 ~ education + female + vote_2008 + black + hispanic + income, model = "logit.survey", weights=~weights, strata=~strata, 
+                  data = anes_genX)
+```
+```{r, message=FALSE, echo = FALSE, fig.align='center', fig.show='hold', fig.width=4, fig.height=5}
+setZ_genY_black <- setx(Z_genY, education = 1:5, black = 1, hispanic = 0, 
+                        income = 3, female = 1, vote_2008 = 0)
+simZ_genY_black <- sim(Z_genY, x = setZ_genY_black)
+ci.plot(simZ_genY_black, ylim = 0:1, ylab = "Probability of voting", 
+        main = "Black Millennial Woman")
+setZ_boomer_black <- setx(Z_boomer, education = 1:5, black = 1, hispanic = 0, 
+                          income = 3, female = 1, vote_2008 = 0)
+simZ_boomer_black <- sim(Z_boomer, x = setZ_boomer_black)
+ci.plot(simZ_boomer_black, ylim = 0:1, ylab = "Probability of voting", 
+        main = "Black Baby Boomer Woman")
+```
+
+### Other plot  
+
+```{r, message=FALSE, echo = FALSE, fig.align='center', fig.show='hold', fig.width=3.5, fig.height=5}
+ci.plot(simZ_genY_black, ylim = 0:1, ylab = "Probability of voting", 
+        main = "Black Millennial Woman")
+setZ_silent_black <- setx(Z_silent, education = 1:5, black = 1, hispanic = 0, 
+                        income = 3, female = 1, vote_2008 = 0)
+simZ_silent_black <- sim(Z_silent, x = setZ_silent_black)
+ci.plot(simZ_silent_black, ylim = 0:1, ylab = "Probability of voting", 
+        main = "Black Silent Generation Woman")
+```
+
+###  white, high-school-educated man across levels of income, assuming he didn't vote in 2008. 
+
 ```{r, message=FALSE, echo = FALSE, fig.align='center', fig.show='hold', fig.width=3.5, fig.height=5}
 setZ_genY_white <- setx(Z_genY, income = 1:7, education = 2, black = 0, 
                         hispanic = 0, female =0, vote_2008 = 1)
@@ -133,8 +154,9 @@ simZ_boomer_white <- sim(Z_boomer, x = setZ_boomer_white)
 ci.plot(simZ_boomer_white, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Baby Boomer Man")
 ```
-## How the model plays out in simulation (part 3) {.columns-2}
-Predicted probabilities of voting for a white, high-school-educated man across levels of income, assuming he didn't vote in 2008. 
+
+###  white, high-school-educated man across levels of income, assuming he didn't vote in 2008. 
+
 ```{r, message=FALSE, echo = FALSE, fig.align='center', fig.show='hold', fig.width=3.5, fig.height=5}
 setZ_genY_white <- setx(Z_genY, income = 1:7, education = 2, black = 0, 
                         hispanic = 0, female =0, vote_2008 = 1)
@@ -148,8 +170,9 @@ simZ_boomer_white <- sim(Z_boomer, x = setZ_boomer_white)
 ci.plot(simZ_boomer_white, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Baby Boomer Man")
 ```
-## How the model plays out in simulation (part 4) {.columns-2}
-It is clear there are little differences for this demographic across other generations as well.
+
+### Plot 
+
 ```{r, message=FALSE, echo = FALSE, fig.align='center', fig.show='hold', fig.width=3.5, fig.height=5}
 ci.plot(simZ_genY_white, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Millennial Man")
@@ -162,8 +185,9 @@ simZ_genX_white <- sim(Z_genX, x = setZ_genX_white)
 ci.plot(simZ_genY_white, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Gen X Man")
 ```
-## How the model plays out in simulation (part 5) {.columns-2}
-Now assume that same white man voted in 2008, which makes a huge difference. 
+
+### plot
+
 ```{r, message=FALSE, echo = FALSE, fig.align='center', fig.show='hold', fig.width=3.5, fig.height=5}
 setZ_genY_voted <- setx(Z_genY, income = 1:7, education = 2, black = 0, 
                         hispanic = 0, female =0, vote_2008 = 1)
@@ -176,8 +200,7 @@ simZ_genX_voted <- sim(Z_genX, x = setZ_genX_voted)
 ci.plot(simZ_genX_voted, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Gen X man who voted in '08")
 ```
-## How the model plays out in simulation (part 5) {.columns-2}
-The effects of differences in voting history only increase with age. 
+### The effects of differences in voting history only increase with age. 
 ```{r, message=FALSE, echo = FALSE, fig.align='center', fig.show='hold', fig.width=3.5, fig.height=5}
 ci.plot(simZ_genX_voted, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Gen X man who voted in '08")
@@ -187,8 +210,7 @@ simZ_boomer_voted <- sim(Z_boomer, x = setZ_boomer_voted)
 ci.plot(simZ_boomer_voted, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Baby Boomer man who voted in '08")
 ```
-## How the model plays out in simulation (part 6) {.columns-2}
-The effects of differences in voting history only increase with age. 
+### The effects of differences in voting history only increase with age. 
 ```{r, message=FALSE, echo = FALSE, fig.align='center', fig.show='hold', fig.width=3.5, fig.height=5}
 ci.plot(simZ_boomer_voted, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Baby Boomer man who voted in '08")
@@ -199,6 +221,24 @@ simZ_silent_voted <- sim(Z_silent, x = setZ_silent_voted)
 ci.plot(simZ_silent_voted, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Silent Generation man who voted in '08")
 ```
+
+
+## Model results {.flexbox .vcenter .smaller} 
+ 
+-Expressed as odds-ratios (exponentiated coefficients), so
+can be interpreted as factor change in odds of voting in 2012
+```{r echo = FALSE, results='asis', message=FALSE,}
+#setwd('C:/Users/Chris/Documents/GitHub/Final_Presentation')
+library(stargazer)
+stargazer(M_genY, M_genX, M_boomer, M_silent, apply.coef = exp,
+         t.auto=F, p.auto=F, report = "vct*", font.size = 'tiny',
+          type = "html",  dep.var.labels = "Probability of voting in 2012", 
+          column.labels = c("Gen Y", "Gen X", "Boomers", "Silent"),
+          title = "Odds Ratios Across Four Generations")
+```
+
+
+
      
 ## Limitations 
 
