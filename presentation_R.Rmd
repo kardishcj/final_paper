@@ -119,28 +119,13 @@ ci.plot(simZ_silent_black, ylim = 0:1, ylab = "Probability of voting",
 Predicted probabilities of voting for a white, high-school-educated man across levels of income, assuming he didn't vote in 2008. 
 ```{r, message=FALSE, echo = FALSE, fig.align='center', fig.show='hold', fig.width=3.5, fig.height=5}
 setZ_genY_white <- setx(Z_genY, income = 1:7, education = 2, black = 0, 
-                        hispanic = 0, female =0, vote_2008 = 1)
+                        hispanic = 0, female =0, vote_2008 = 0)
 simZ_genY_white <- sim(Z_genY, x = setZ_genY_white)
 ci.plot(simZ_genY_white, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Millennial Man")
 #Now, Baby Boomer
 setZ_boomer_white <- setx(Z_boomer, income = 1:7, education = 2, black = 0, 
-                          hispanic = 0, female =0, vote_2008 = 1)
-simZ_boomer_white <- sim(Z_boomer, x = setZ_boomer_white)
-ci.plot(simZ_boomer_white, ylim = 0:1, ylab = "Probability of voting", 
-        main = "White Baby Boomer Man")
-```
-## How the model plays out in simulation (part 3) {.columns-2}
-Predicted probabilities of voting for a white, high-school-educated man across levels of income, assuming he didn't vote in 2008. 
-```{r, message=FALSE, echo = FALSE, fig.align='center', fig.show='hold', fig.width=3.5, fig.height=5}
-setZ_genY_white <- setx(Z_genY, income = 1:7, education = 2, black = 0, 
-                        hispanic = 0, female =0, vote_2008 = 1)
-simZ_genY_white <- sim(Z_genY, x = setZ_genY_white)
-ci.plot(simZ_genY_white, ylim = 0:1, ylab = "Probability of voting", 
-        main = "White Millennial Man")
-#Now, Baby Boomer
-setZ_boomer_white <- setx(Z_boomer, income = 1:7, education = 2, black = 0, 
-                          hispanic = 0, female =0, vote_2008 = 1)
+                          hispanic = 0, female =0, vote_2008 = 0)
 simZ_boomer_white <- sim(Z_boomer, x = setZ_boomer_white)
 ci.plot(simZ_boomer_white, ylim = 0:1, ylab = "Probability of voting", 
         main = "White Baby Boomer Man")
