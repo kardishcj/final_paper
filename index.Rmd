@@ -1,5 +1,5 @@
 ---
-title: "Predicting Voter Turnout by Generation"
+title: "Predict"
 author: "C. Kardish & M. Agosta"
 output: 
   flexdashboard::flex_dashboard:
