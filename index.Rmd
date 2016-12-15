@@ -31,11 +31,10 @@ Taking 2012 survey data and dividing it into four generations (from youngest to 
 * Education 
 * Past voting decisions
     
-We also added race and gender to the mix.
+We also added race and gender to the mix. 
 
-
-
-**Key Findings: determinates of voter turnout in 2012** 
+***
+**Key Findings: determinants of voter turnout in 2012** 
     
 **1.) Key predictors still show a large degree of consistency across generations.** 
 
@@ -51,6 +50,8 @@ We also added race and gender to the mix.
 
 **7.) Race and past voting decisions proved the most decisive factors in terms of differences between the generations.** 
 
+
+***
 Below are a few plots of predicted probability of voting across different generations and demographics. They highlight some of the key findings above, specifically concerning race and past voting history. You can find more about the methodology, the results of the statistical model, and limitations in the other tabs. 
 
 Row 
