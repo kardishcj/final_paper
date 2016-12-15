@@ -1,5 +1,5 @@
 ---
-title: "Predict"
+title: "Voter Turnout"
 author: "C. Kardish & M. Agosta"
 output: 
   flexdashboard::flex_dashboard:
@@ -129,7 +129,7 @@ ci.plot(simZ_boomer_voted, ylim = 0:1, ylab = "Probability of voting in 2012",
         main = "White Baby Boomer man who voted in '08")
 ```
 
-# Methodology & Data Source 
+# Methodology & Data 
 
 **We performed a logistic regression to assess the strength of various predictors on the likelihood that a given respondent voted in 2012. Thus, we use a binary dependent variable, also known as a dummy variable, coded "1" if the respondent did vote in 2012 and 0 if not. We run the same model but for different age bands. This allows us to discern differences in predictive power across age groups.**  
 
@@ -161,7 +161,7 @@ The source we used was the 2012 Time Series Study from American National Electio
 * Clustering and post-stratification weights were used. 
 
 
-# Results and Additional Plots 
+# Results & Additional Plots 
 Row 
 -------------------------------------
 ### Results of statistical model
