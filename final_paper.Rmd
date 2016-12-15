@@ -282,3 +282,15 @@ Ultimately, the model still suffers from the problems that have faced every poli
  
 
 # Bibliography
+
+Choirat C, Honaker J, Imai K, King G and Lau O (2016). Zelig: Everyone's Statistical Software. Version 5.0-13, http://zeligproject.org/.
+
+Imai K, King G and Lau O (2008). “Toward A Common Framework for Statistical Analysis and Development.” Journal of Computational Graphics and Statistics, 17(4), pp. 892-913. http://j.mp/msE15c.
+
+Hlavac, Marek (2015). stargazer: Well-Formatted Regression and Summary Statistics Tables. R package version 5.2. http://CRAN.R-project.org/package=stargazer
+
+Yihui Xie (2016). knitr: A General-Purpose Package for Dynamic Report Generation in R. R package version 1.15.1.
+
+Yihui Xie (2015) Dynamic Documents with R and knitr. 2nd edition. Chapman and Hall/CRC. ISBN 978-1498716963
+
+Yihui Xie (2014) knitr: A Comprehensive Tool for Reproducible Research in R. In Victoria Stodden, Friedrich Leisch and Roger D. Peng, editors, Implementing Reproducible Computational Research. Chapman and Hall/CRC. ISBN 978-1466561595
