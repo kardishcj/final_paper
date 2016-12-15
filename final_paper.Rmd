@@ -113,32 +113,15 @@ The results in Table 1 and its confidence intervals below it show a considerable
 
 The greatest variation between generations can be found in the effects of race, and those effects are not uniformly statistically significant across generations. The effect of being black or hispanic is positive and significant for Millennials, while the effect of being hispanic is not statistically significant or positive for any other generation. The effect of being black is also statistically significant for Baby Boomers and the Silent Generation, but the substantive significance is markedly different: the effect is negative for Baby Boomers but strongly positive among the Silent Generation, even more substantively significant than for Millennials. 
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
-
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='asis', fig.show='hold'}
 stargazer(M_genY, M_genX, M_boomer, M_silent, apply.coef = exp,
-         t.auto=F, p.auto=F, report = "vct*", 
+         t.auto=F, p.auto=F, report = "vct*", float = F,
          dep.var.labels = "Probability of voting in 2012", 
           column.labels = c("Gen Y", "Gen X", "Boomers", "Silent"),
           title = "Odds Ratios Across Four Generations")
 ```
-```{r, echo=FALSE}
-conf_intervals_exp <- cbind(exp(confint(M_genY)), exp(confint(M_genX)), 
-                            exp(confint(M_boomer)), exp(confint(M_silent)))
-conf_intervals_exp <- round(conf_intervals_exp, digits = 3)
-conf_intervals_exp <- as.data.frame(conf_intervals_exp)
-colnames(conf_intervals_exp) <- c(1, 2, 3, 4, 5, 6, 7, 8)
-conf_intervals_exp$gen_Y <- paste(conf_intervals_exp$`1`, conf_intervals_exp$`2`, sep=",")
-conf_intervals_exp$gen_X <- paste(conf_intervals_exp$`3`, conf_intervals_exp$`4`, sep=",")
-conf_intervals_exp$boomer <- paste(conf_intervals_exp$`5`, conf_intervals_exp$`6`, sep=",")
-conf_intervals_exp$silent <- paste(conf_intervals_exp$`7`, conf_intervals_exp$`8`, sep=",")
-conf_intervals_exp_kab <- cbind(varnames, conf_intervals_exp$gen_Y, conf_intervals_exp$gen_X,
-                        conf_intervals_exp$boomer, conf_intervals_exp$silent)
-kable(conf_intervals_exp_kab, format = 'markdown', 
-      col.names = c("Coefficients", "Gen Y", "Gen X", "Boomers", "Silent"), 
-      caption = "Figure 4: Confidence Intervals of Odds Ratios")
-```
 
-The above findings are simply reinforced when observing the exponentiated coefficients (Table 3 and its confidence intervals below it), but their substantive impact is easier to interpret. An additional level of education increases the odds of voting 1.32 times for Millennials, and similarly across all generations. Recall that there are five levels of education, ranging from below high school to graduate-level. An additional level of income increases the odds of voting 1.22 times for Millennials and by a similar factor across all generations. Recall that there are 7 levels of income ranges, from $0-$20,000 per year to $250,000 or above. 
+The above findings are simply reinforced when observing the exponentiated coefficients (above), but their substantive impact is easier to interpret. An additional level of education increases the odds of voting 1.32 times for Millennials, and similarly across all generations. Recall that there are five levels of education, ranging from below high school to graduate-level. An additional level of income increases the odds of voting 1.22 times for Millennials and by a similar factor across all generations. Recall that there are 7 levels of income ranges, from $0-$20,000 per year to $250,000 or above. 
 
 However, it is also true that the odds-ratio of education for Millennials is slightly weaker than that of any other generation, which may reflect diminishing returns of the predictive power of a university education for this generation, which is the best educated of any in American history in terms of bachelor's degree attainment. The gains from a university education grow with the age of the generation, with the strongest odds for the Silent Generation. The effect of income, on the other hand, is stronger for Millennials than any generation other than the Silent Generation, with Generation X and Baby Boomers showing the smallest effects. 
 
