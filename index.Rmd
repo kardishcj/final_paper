@@ -1,5 +1,5 @@
 ---
-title: "Predicting Voter Turnout by Generation"
+title: "Predict"
 author: "C. Kardish & M. Agosta"
 output: 
   flexdashboard::flex_dashboard:
@@ -22,7 +22,7 @@ source("cleaning_final.R")
 
 **A number of key factors have long been considered essential in determining whether a person is likely to vote, including income and education. But are these factors equally significant determinants of whether a person is likely to vote across different generations? Do other potential indicators, such as race or gender, hold more predictive power for the Millennial generation?** 
 
-We're especially interested in Millennials. They will play an increasingly significant role in U.S. elections as they represent the greatest share of eligible voters, but there are substantial differences in disposition and demographics between them and previous generations, which could well mean differences in factors that bring them to the polls. Although **69.2 million Millenials** are eligible to vote, historically approximately 50-55% do not turn out to vote for presidential elections. 
+We're especially interested in Millennials. They will play an increasingly significant role in U.S. elections as they represent the greatest share of eligible voters, but there are substantial differences in disposition and demographics between them and previous generations, which could well mean differences in factors that bring them to the polls. Although **69.2 million Millenials** are eligible to vote, historically approximately 50-55% do not turn out to vote in presidential elections. 
 
 Taking 2012 survey data and dividing it into four generations (from youngest to oldest: Millennial, Generation X, Baby Boomer, and Silent Generation), we examined how well the traditional factors below predict whether a person of similar makeup but belonging to a different generation was likely to vote. 
 
