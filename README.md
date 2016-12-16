@@ -1,10 +1,10 @@
 # final_paper
 
-The final outputs of this projec are final_project.pdf and index.html. final_product.pdf is the academic paper version of a logistic regression comparing the impact of a number of explanatory variables on the likelihood of voting across four different generations. index.html is the website version. The files that produced these final outputs are final_product.Rmd and index.Rmd.
+The final outputs of this projec are final_project.pdf and index.html. final_product.pdf is the academic paper version of a logistic regression comparing the impact of a number of explanatory variables on the likelihood of voting across four different generations in the 2012 US presidential election. index.html is the website version. The files that produced these final outputs are final_product.Rmd and index.Rmd.
 
-The data used is contained in anes_timeseries_2012_Stata12.dta.
+The data used is contained in anes_timeseries_2012_Stata12.dta. It is 2012 survey data from American National Election Studies, and it can be found here: http://www.electionstudies.org/studypages/anes_timeseries_2012/anes_timeseries_2012.htm 
 
-The script that was used to clean and prepare the above data is cleaning_final.R. This script is dynamically linked via the "source" function to both final products. 
+The script that was used to clean and prepare the above data is cleaning_final.R. This script is dynamically linked via the "source" function to both R markdown files that produced the final products. 
 
 final_paper.bib contains the bibliography that is used in final_product.pdf. 
 
